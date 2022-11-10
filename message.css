@@ -1,0 +1,58 @@
+#message_div {
+    position: fixed;
+    width: fit-content;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    left: 50%;
+    bottom: 60px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 22px;
+    border: rgba(0, 0, 0, 0.76) solid 2px;
+    border-radius: 80px;
+    background-color: #08d4ea;
+    background-image: linear-gradient(10deg, #61e9f8b4 0%, #44f14d 100%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+@media screen and (max-width: 800px){
+    #message_div {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 600px){
+    #message_div {
+        padding-left: 6px;
+        padding-right: 6px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        font-size: 11px;
+    }
+}
+@media screen and (max-width: 400px){
+    #message_div {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        font-size: 9px;
+    }
+}
