@@ -1,12 +1,9 @@
 <?php
 
-require_once './lib/konfig.php';
+require_once './lib/config.php';
 
 $conn = getDBConnection();
 checkIfDBExists();
-// make $conn available for other scripts in same session
-session_start();
-$_SESSION['conn'] = $conn;
 
 
 function getDBConnection() {
