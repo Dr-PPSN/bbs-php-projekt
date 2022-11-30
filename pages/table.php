@@ -1,6 +1,6 @@
 <?php
 
-require './DB.php';
+require './lib/DB.php';
 
 
 $selTable = getSelTable();

@@ -1,6 +1,6 @@
 <?php
 
-require_once './konfig.php';
+require_once './lib/konfig.php';
 
 $conn = getDBConnection();
 checkIfDBExists();
