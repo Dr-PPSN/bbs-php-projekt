@@ -1,7 +1,9 @@
 <?php
 
-// Parameter: Tabelle, ID
-// TODO: edit form designen abhängig vom übergebenen Parameter
+// edit page gets called with GET request (table & id)
+// edit page IS NOT AVAILABLE for results from sql injection
+// TODO: design edit page dependent on given table
+// by submitting, the original data 
 
 $table = $_REQUEST['table'];
 $id    = $_REQUEST['id'];

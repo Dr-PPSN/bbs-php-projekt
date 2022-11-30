@@ -2,6 +2,8 @@
 
 require './lib/DB.php';
 
+// TODO: Edit / Delete Button for every table row
+
 
 $selTable = getSelTable();
 
