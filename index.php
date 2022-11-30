@@ -1,6 +1,5 @@
 <?php
-    //$db_link = mysqli_connect (db5010772275.hosting-data.io, dbu1627740, Me@Og_oB5f3fb5c, dbs9113196);
-    require 'controller.php';
+    require './table.php';
 ?>
 <!DOCTYPE html>
 <html lang=de>
@@ -57,7 +56,7 @@
                 <label for="buecher_Id">Buch ID: </label><br>
                 <input type="text" name="buecher_Id"><br>
                 <label for="titel">Titel: </label><br>
-                <input type="text" name="titel"><br>
+                <input type="text" name="titel"><br>    
                 <button type="submit" name="add" class="button" value="add">Einfügen</button>
             </form>
             
