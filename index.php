@@ -52,14 +52,6 @@
                 </div>
             </div>
             <!-- /Die ausgewaelte Tabelle -->
-            <form action="" method="post">
-                <label for="buecher_Id">Buch ID: </label><br>
-                <input type="text" name="buecher_Id"><br>
-                <label for="titel">Titel: </label><br>
-                <input type="text" name="titel"><br>    
-                <button type="submit" name="add" class="button" value="add">Einfügen</button>
-            </form>
-            
         </div>
         <!-- Modal SQL-Injection -->
         <div class="modal fade" id="sql_injection_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
