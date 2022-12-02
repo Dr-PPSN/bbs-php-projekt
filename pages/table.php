@@ -65,14 +65,14 @@ function buildHtmlTable($tabledata) {
     $tableHeader = $tabledata[0];
     $thHTML = '<tr>';
     foreach ($tableHeader as $value) {
-      $thHTML .= '<th scope="col">' . $value->name . '</th>';
+      $thHTML .= '<th scope="col" class= "neonTableHeader">' . $value->name . '</th>';
     }
     $thHTML .= '</tr>';
 
     $trHTML = '';
     for ($i = 1; $i < count($tabledata); $i++) {
       $row = $tabledata[$i];
-      $trHTML .= '<tr>';
+      $trHTML .= '<tr class= "neonTableHeaderGreen">';
       foreach ($row as $value) {
         $trHTML .= '<td>' . $value . '</td>';
       }

@@ -11,7 +11,8 @@
         <link rel="stylesheet" type="text/css" href="./styles/message.css">
         <link rel="stylesheet" type="text/css" href="./styles/style.css">
     </head>
-    <body>
+   
+<body>
         <div class="container-fluid h-100 bg-dark">
             <!-- Menue -->
             <div class="row bg-dark">
@@ -26,7 +27,7 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
                         <form action="" method="post">
-                            <button type="submit" name="btnReset" class="btn btn-danger" value="reset">Datenbank zurücksetzen</button>
+                            <button type="submit" name="btnReset" class="btn neon-button" value="reset">Datenbank zurücksetzen</button>
                         </form>
                     </div>
                 </div>
@@ -52,6 +53,14 @@
                 </div>
             </div>
             <!-- /Die ausgewaelte Tabelle -->
+            <form action="" method="post">
+                <label for="buecher_Id">Buch ID: </label><br>
+                <input type="text" name="buecher_Id"><br>
+                <label for="titel">Titel: </label><br>
+                <input type="text" name="titel"><br>
+                <button type="submit" name="add" class="button" value="add">Einfügen</button>
+            </form>
+            
         </div>
         <!-- Modal SQL-Injection -->
         <div class="modal fade" id="sql_injection_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
