@@ -22,7 +22,7 @@ if (!empty($_POST['btnReset'])) {
 function getSelTable() {
   $tableData = executeSQL("select TABLE_NAME from information_schema.tables where table_type = 'BASE TABLE' and TABLE_SCHEMA = 'buchladen';");
   if (isset($tableData)) {
-    $htmlString = '<select name="selTable" id="selTable">';
+    $htmlString = '<select class="btn neon-button" name="selTable" id="selTable">';
     for ($i = 1; $i < count($tableData); $i++) {
       $row = $tableData[$i];
       foreach ($row as $value) {

@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-md-5 col-sm-6 col-xs-8 d-flex align-items-center justify-content-center">
                     <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
-                        <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#sql_injection_modal">
+                        <a class="btn neon-button" data-toggle="modal" data-target="#sql_injection_modal">
                             SQL-Injection
                         </a>
                     </div>
@@ -41,7 +41,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
                     <form action="" method="post">
                         <?php echo $selTable?>
-                        <button type="submit" name="btnGetTable" class="button" id="btnAnzeigen" value="getTable">Anzeigen</button>
+                        <button type="submit" name="btnGetTable" class="btn neon-button" id="btnAnzeigen" value="getTable">Anzeigen</button>
                     </form>
                 </div>
             </div>

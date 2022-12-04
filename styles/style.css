@@ -127,7 +127,7 @@
 
 :root {
     --clr-neon: hsl(317 100% 54%);
-    --clr-bg: hsl(323 21% 16%);
+    --clr-bg: rgb(226, 164, 213);
   }
   
   *,
@@ -145,6 +145,7 @@
     border: var(--clr-neon) 0.125em solid;
     padding: 0.25em 1em;
     border-radius: 0.25em;
+    background-color: none;
   
     text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
   
@@ -169,7 +170,7 @@
   
   .neon-button:hover,
   .neon-button:focus {
-    color: var(--clr-bg);
+    background-color: var(--clr-bg);
     text-shadow: none;
   }
   
