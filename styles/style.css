@@ -153,21 +153,6 @@
     position: relative;
   }
   
-  .neon-button::before {
-    pointer-events: none;
-    content: "";
-    position: absolute;
-    background: var(--clr-neon);
-    top: 120%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-  
-    transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
-    filter: blur(1em);
-    opacity: 0.7;
-  }
-  
   .neon-button::after {
     content: "";
     position: absolute;
@@ -188,10 +173,6 @@
     text-shadow: none;
   }
   
-  .neon-button:hover::before,
-  .neon-button:focus::before {
-    opacity: 1;
-  }
   .neon-button:hover::after,
   .neon-button:focus::after {
     opacity: 1;
