@@ -1,85 +1,62 @@
 <?php
 
-require './lib/DB.php';
+require './lib/sql.php';
 
 // TODO: Edit / Delete Button for every table row
+$tableHTML = '';
 
-
-$selTable = getSelTable();
-
-$table = buildHtmlTable(getTableData('AUTOREN'));
-if (!empty($_POST['btnGetTable'])) {
-  $table = buildHtmlTable(getTableData($_POST['selTable']));
-}
-if (!empty($_POST['btnSQLInjection'])) {
-  $table = buildHtmlTable(executeSQL($_POST['sql-injection-text']));
-}
-
-if (!empty($_POST['btnReset'])) {
+if (!empty($_POST['selTable'])) {
+  switch ($_POST['selTable']) {
+    case 'buecher':
+      $tableHTML = buildHtmlTable(getBuecher());
+      break;
+    case 'autoren':
+      $tableHTML = buildHtmlTable(getAutoren());
+      break;
+    case 'sparten':
+      $tableHTML = buildHtmlTable(getSparten());
+      break;
+    case 'verlage':
+      $tableHTML = buildHtmlTable(getVerlage());
+      break;
+    case 'lieferanten':
+      $tableHTML = buildHtmlTable(getLieferanten());
+      break;
+    case 'orte':
+      $tableHTML = buildHtmlTable(getOrte());
+      break;
+    default:
+  }
+} else if (!empty($_POST['btnSQLInjection'])) {
+  $tableHTML = buildHtmlTable(executeSQL($_POST['sql-injection-text']), false);
+} else if (!empty($_POST['btnReset'])) {
   resetDB();
 }
 
-function getSelTable() {
-  $tableData = executeSQL("select TABLE_NAME from information_schema.tables where table_type = 'BASE TABLE' and TABLE_SCHEMA = 'buchladen';");
+function buildHtmlTable($tableData, $showButtons = true) {
   if (isset($tableData)) {
-    $htmlString = '<select name="selTable" id="selTable">';
-    for ($i = 1; $i < count($tableData); $i++) {
-      $row = $tableData[$i];
-      foreach ($row as $value) {
-        if (isset($_POST['selTable']) && $value == $_POST['selTable']) {
-          $htmlString .= '<option value="' . $value . '" selected>' . strtoupper($value) . '</option>';
-        } else {
-          $htmlString .= '<option value="' . $value . '">' . strtoupper($value) . '</option>';
-        }
-      }
-    }
-    $htmlString .= '</select>';  
-    return $htmlString;
-  }
-}
-
-function getTableData($table) {
-  return executeSQL("SELECT * FROM buchladen." . $table . ";");
-}
-
-function executeSQL($SQL) {
-  global $conn;
-  global $notification;
-  $result = $conn->query($SQL);
-  if ($result === true) {
-    return true;
-  } else if ($result === false) {
-    $notification = 'Ups ein Fehler ist aufgetreten';
-    return false;
-  } else {
-    $tableData[] = $result->fetch_fields();
-    while ($row = $result->fetch_assoc()) {
-      $tableData[] = $row;
-    }
-    return $tableData;
-  }
-}
-
-function buildHtmlTable($tabledata) {
-  if (isset($tabledata)) {
-    $tableHeader = $tabledata[0];
+    $colNames = array_keys($tableData[0]);
     $thHTML = '<tr>';
-    foreach ($tableHeader as $value) {
-      $thHTML .= '<th scope="col">' . $value->name . '</th>';
+    foreach ($colNames as $colName) {
+      $thHTML .= '<th scope="col">' . $colName . '</th>';
     }
     $thHTML .= '</tr>';
 
     $trHTML = '';
-    for ($i = 1; $i < count($tabledata); $i++) {
-      $row = $tabledata[$i];
+    for ($i = 0; $i < count($tableData); $i++) {
+      $row = $tableData[$i];
       $trHTML .= '<tr>';
-      foreach ($row as $value) {
-        $trHTML .= '<td>' . $value . '</td>';
+      foreach ($row as $val) {
+        $trHTML .= '<td>' . $val . '</td>';
+      }
+      if ($showButtons) {
+        $trHTML .= '<td><button>Edit</button></td>';
+        $trHTML .= '<td><button>Del</button></td>';
       }
       $trHTML .= '</tr>';
     }
     $tableHTML = '<table class="table table-striped table-dark">' . $thHTML . $trHTML . '</table>';
+    return $tableHTML;
   }
-  return $tableHTML;
 }
 
