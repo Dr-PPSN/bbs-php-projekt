@@ -8,5 +8,32 @@
 $table = $_REQUEST['table'];
 $id    = $_REQUEST['id'];
 
+$tableHTML = '';
+switch ($table) {
+  case 'buecher':
+    $tableHTML = buildHtmlTable(getBuecher($id));
+    break;
+  case 'autoren':
+    $tableHTML = buildHtmlTable(getAutoren($id));
+    break;
+  case 'sparten':
+    $tableHTML = buildHtmlTable(getSparten($id));
+    break;
+  case 'verlage':
+    $tableHTML = buildHtmlTable(getVerlage($id));
+    break;
+  case 'lieferanten':
+    $tableHTML = buildHtmlTable(getLieferanten($id));
+    break;
+  case 'orte':
+    $tableHTML = buildHtmlTable(getOrte($id));
+    break;
+  default:
+}
+
+function buildEditForm($id) {
+  
+}
+
 
 ?>
