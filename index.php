@@ -39,7 +39,14 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
                     <form action="" method="post">
-                        <?php echo $selTable?>
+                        <select id="selTable" name="selTable" onchange="this.form.submit()">
+                            <option value="buecher">Bücher</option>
+                            <option value="autoren" selected>Autoren</option>
+                            <option value="sparten">Sparten</option>
+                            <option value="verlage">Verlage</option>
+                            <option value="lieferanten">Lieferanten</option>
+                            <option value="orte">Orte</option>
+                        </select>
                         <button type="submit" name="btnGetTable" class="button" id="btnAnzeigen" value="getTable">Anzeigen</button>
                     </form>
                 </div>
