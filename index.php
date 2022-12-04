@@ -55,7 +55,7 @@
             <!-- Die ausgewaelte Tabelle -->
             <div class="row bg-dark">
                 <div class="col-md-12 d-flex align-items-center justify-content-center" id="tableElement">
-                    <?php echo $table?>
+                    <?php echo $tableHTML?>
                 </div>
             </div>
             <!-- /Die ausgewaelte Tabelle -->
