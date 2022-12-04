@@ -9,8 +9,11 @@ checkIfDBExists();
 function getDBConnection() {
   $conn = new mysqli(MYSQL_HOST, MYSQL_BENUTZER, MYSQL_KENNWORT);
   if ($conn->connect_error) {
-    exit("Connection failed: " . $conn->connect_error);
+    global $notification;
+    $notification = "Connection failed: " . $conn->connect_error; 
+    exit();
   }
+  $conn->select_db('buchladen');
   return $conn;
 }
 
@@ -43,7 +46,7 @@ function resetDB() {
       $tempLine = '';
     }
   }
-  $notification = 'Tables successfully imported';
+  $notification = 'Datenbank zurückgesetzt';
 }
 
 ?>
