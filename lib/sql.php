@@ -7,23 +7,28 @@ require 'DB.php';
 function executeSQL($SQL, $params = null) {
   global $conn;
   global $notification;
-  $statement = $conn->prepare($SQL);
-  if ($statement->execute($params) === true) {
-    $result = $statement->get_result(); 
-    if ($result === true) {
-      return true;
-    } else if ($result === false) {
-      $notification = 'Serverfehler';
-      return false;
-    } else {
-      $tableData = [];
-      while ($row = $result->fetch_assoc()) {
-        $tableData[] = $row;
+  try {
+    $statement = $conn->prepare($SQL);
+    if ($statement->execute($params) === true) {
+      $result = $statement->get_result(); 
+      if ($result === true) {
+        return true;
+      } else if ($result === false) {
+        $notification = 'SQL Fehler: ' . $conn->error;
+        return false;
+      } else {
+        $tableData = [];
+        while ($row = $result->fetch_assoc()) {
+          $tableData[] = $row;
+        }
+        return $tableData;
       }
-      return $tableData;
+    } else {
+      $notification = 'SQL Fehler: ' . $conn->error;
+      return false;
     }
-  } else {
-    $notification = 'Serverfehler';
+  } catch (Exception $e) {
+    $notification = 'SQL Fehler: ' . $conn->error;
     return false;
   }
 }
