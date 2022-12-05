@@ -1,11 +1,41 @@
-body {
+  body {
     font-family: "Helvetica Neue", sans-serif;
   }
 
 .neonTextFlickerGreen{
     animation: flicker 1.5s infinite alternate;
     color: #fff;
+    font-family: neon;
 }
+
+.neonTableHeader{
+    color: white;
+    font-family: neonTableHeader;
+
+    text-shadow:
+    0 0 7px #ef1de7,
+    0 0 10px #ef1de7,
+    0 0 21px #ef1de7,
+    0 0 42px #ef1de7,
+    0 0 82px #ef1de7,
+    0 0 92px #ef1de7,
+    0 0 102px #ef1de7,
+    0 0 151px #ef1de7;
+
+}
+
+.neonTableHeaderGreen{
+    color: white;
+    font-family: neonTableHeader;
+    
+
+    text-shadow:
+    0 0 8px #39ff14,
+    0 0 40px #39ff14,
+    0 0 50px #39ff14;
+
+}
+
 /* Flickering animation */
 @keyframes flicker {
     
@@ -40,3 +70,68 @@ body {
       0 0 102px #5271ff,
       0 0 151px #5271ff;
   }
+
+@font-face{
+    font-family: neon;
+    src: url("../essets/rubber/Rubber.ttf");
+}
+
+@font-face{
+    font-family: neonTableHeader;
+    src: url("../essets/plasmatica/Plasma01.ttf");
+}
+
+:root {
+    --clr-neon: hsl(317 100% 54%);
+    --clr-bg: rgb(226, 164, 213);
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+ .neon-button {
+  
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--clr-neon);
+    border: var(--clr-neon) 0.125em solid;
+    padding: 0.25em 1em;
+    border-radius: 0.25em;
+    background-color: none;
+  
+    text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+  
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+  
+    position: relative;
+  }
+  
+  .neon-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 2em 0.5em var(--clr-neon);
+    opacity: 0;
+    background-color: var(--clr-neon);
+    z-index: -1;
+    transition: opacity 100ms linear;
+  }
+  
+  .neon-button:hover,
+  .neon-button:focus {
+    background-color: var(--clr-bg);
+    text-shadow: none;
+  }
+  
+  .neon-button:hover::after,
+  .neon-button:focus::after {
+    opacity: 1;
+  }
+  
