@@ -1,6 +1,8 @@
 <?php
 
-require_once './lib/config.php';
+// Funktionen für DB-Operationen
+
+require_once 'config.php';
 
 $conn = getDBConnection();
 checkIfDBExists();
