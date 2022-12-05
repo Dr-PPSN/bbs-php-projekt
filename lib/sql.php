@@ -1,8 +1,8 @@
 <?php
 
-// TODO: update-function for every table --> gets used in edit.php
+// Funktionen für alle SQL-Operationen
 
-require './lib/DB.php';
+require 'DB.php';
 
 function executeSQL($SQL, $params = null) {
   global $conn;
@@ -27,6 +27,8 @@ function executeSQL($SQL, $params = null) {
     return false;
   }
 }
+
+// ---------------------------- get tables -------------------------------------
 
 function getBuecher($id = null) {
   $SQL = '
@@ -149,20 +151,51 @@ function getOrte($id = null) {
 }
 
 
+// ---------------------------- all tables -------------------------------------
 
 
-
-function updateOrte($id, $col, $val) {
-  global $conn;
+function getAllTables() {
   $SQL = '
-  SELECT 
-    o.orte_id ID,
-    o.postleitzahl PLZ,
-    o.name Sitz
-  FROM orte o
+  SELECT
+    table_name
+  FROM 
+    information_schema.tables
+  WHERE
+    (table_type = "BASE TABLE")
+    AND
+    (table_schema = "buchladen")
+  ORDER BY
+    table_name
   ';
   return executeSQL($SQL);
 }
 
+function getTable($tableName) {
+  $SQL = '
+  SELECT
+    *
+  FROM
+  '. $tableName;
+  return executeSQL($SQL);
+}
+
+
+// ---------------------------- update tables -------------------------------------
+
+
+function updateOrte(int $id, array $values) {
+  $SQL = '
+  UPDATE
+    orte o
+  SET
+    o.postleitzahl = ?,
+    o.name = ?
+  WHERE
+    o.orte_id = ?
+  ';
+  return executeSQL($SQL, [$values, $id]);
+}
+
+// TODO: update-function for every table --> gets used in edit.php
 
 ?>
