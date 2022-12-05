@@ -1,6 +1,22 @@
 <?php
-    require './pages/table.php';
+    
+    // Landing Page
+
+
+    if (isset($_POST['btnAllTables'])) {
+        header('Location: /pages/alltables.php');
+        exit();
+    } else if (isset($_POST['btnSQLInjection'])) {
+        // TODO: check if sql is select -> redirect to table.php with sql
+        // else display notification if successful or not
+        // $tableHTML = buildHtmlTable(executeSQL($_POST['sql-injection-text']));
+    } else if (isset($_POST['btnReset'])) {
+        require './lib/DB.php';
+        resetDB();
+    }
+
 ?>
+
 <!DOCTYPE html>
 <html lang=de>
     <head>
@@ -38,27 +54,23 @@
                     Datenbank auswählen:
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
+                    <!-- TODO: Button für Tabellenauswahl hinzufügen -->
+                    <form action="pages/table.php" method="get">
+                        <button type="submit" name="table" class="button" id="btnTable" value="buecher">Bücher</button>
+                        <button type="submit" name="table" class="button" id="btnTable" value="autoren">Autoren</button>
+                        <button type="submit" name="table" class="button" id="btnTable" value="sparten">Sparten</button>
+                        <button type="submit" name="table" class="button" id="btnTable" value="verlage">Verlage</button>
+                        <button type="submit" name="table" class="button" id="btnTable" value="lieferanten">Lieferanten</button>
+                        <button type="submit" name="table" class="button" id="btnTable" value="orte">Orte</button>
+                    </form>
                     <form action="" method="post">
-                        <select id="selTable" name="selTable" onchange="this.form.submit()">
-                            <option value="buecher">Bücher</option>
-                            <option value="autoren" selected>Autoren</option>
-                            <option value="sparten">Sparten</option>
-                            <option value="verlage">Verlage</option>
-                            <option value="lieferanten">Lieferanten</option>
-                            <option value="orte">Orte</option>
-                        </select>
-                        <button type="submit" name="btnGetTable" class="button" id="btnAnzeigen" value="getTable">Anzeigen</button>
+                        <button type="submit" name="btnAllTables" class="button" id="btnAllTables" value="">Alle Tabellen anzeigen</button>
+                        <button type="submit" name="btnSQLInjection" class="button" id="btnSQLInjection" value="">SQL Injection</button>
+                        <button type="submit" name="btnReset" class="button" id="btnReset" value="">Datenbank zurücksetzen</button>
                     </form>
                 </div>
             </div>
             <!-- /Row1 -->
-            <!-- Die ausgewaelte Tabelle -->
-            <div class="row bg-dark">
-                <div class="col-md-12 d-flex align-items-center justify-content-center" id="tableElement">
-                    <?php echo $table?>
-                </div>
-            </div>
-            <!-- /Die ausgewaelte Tabelle -->
         </div>
         <!-- Modal SQL-Injection -->
         <div class="modal fade" id="sql_injection_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
