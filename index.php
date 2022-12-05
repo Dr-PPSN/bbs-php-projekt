@@ -2,17 +2,22 @@
     
     // Landing Page
 
+    checkPHPVersion();
 
-    if (isset($_POST['btnAllTables'])) {
-        header('Location: /pages/alltables.php');
-        exit();
-    } else if (isset($_POST['btnSQLInjection'])) {
+    if (isset($_POST['btnSQLInjection'])) {
         // TODO: check if sql is select -> redirect to table.php with sql
         // else display notification if successful or not
         // $tableHTML = buildHtmlTable(executeSQL($_POST['sql-injection-text']));
     } else if (isset($_POST['btnReset'])) {
         require './lib/DB.php';
         resetDB();
+    }
+
+    function checkPHPVersion() {
+        if (version_compare(phpversion(), '8.1.0', '<')) {
+            echo 'PHP Version is too old. Please update to 8.1.0 or higher.';
+            exit();
+        }
     }
 
 ?>
@@ -63,9 +68,13 @@
                         <button type="submit" name="table" class="button" id="btnTable" value="lieferanten">Lieferanten</button>
                         <button type="submit" name="table" class="button" id="btnTable" value="orte">Orte</button>
                     </form>
+                    <form action="pages/alltables.php" method="get">
+                        <button type="submit" name="alltables" class="button" id="btnAllTables">Alle Tabellen anzeigen</button>
+                    </form>
+                    <form action="pages/sqlinjection.php">
+                        <button type="submit" name="sqlinjection" class="button" id="btnSQLInjection">SQL Injection</button>
+                    </form>
                     <form action="" method="post">
-                        <button type="submit" name="btnAllTables" class="button" id="btnAllTables" value="">Alle Tabellen anzeigen</button>
-                        <button type="submit" name="btnSQLInjection" class="button" id="btnSQLInjection" value="">SQL Injection</button>
                         <button type="submit" name="btnReset" class="button" id="btnReset" value="">Datenbank zurücksetzen</button>
                     </form>
                 </div>
