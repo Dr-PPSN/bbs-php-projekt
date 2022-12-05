@@ -7,14 +7,14 @@ function buildHtmlTable($tableData, $showButtons = true) {
     $colNames = array_keys($tableData[0]);
     $thHTML = '<tr>';
     foreach ($colNames as $colName) {
-      $thHTML .= '<th scope="col">' . $colName . '</th>';
+      $thHTML .= '<th scope="col" class= "neonTableHeader">' . $colName . '</th>';
     }
     $thHTML .= '</tr>';
 
     $trHTML = '';
     for ($i = 0; $i < count($tableData); $i++) {
       $row = $tableData[$i];
-      $trHTML .= '<tr>';
+      $trHTML .= '<tr class= "neonTableHeaderGreen">';
       foreach ($row as $val) {
         $trHTML .= '<td>' . $val . '</td>';
       }

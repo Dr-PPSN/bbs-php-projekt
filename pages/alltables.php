@@ -17,7 +17,7 @@ if (isset($_GET['selTable'])) {
 function buildSelectAllTables($selectedTable = null) {
   $tables = getAllTables();
   if (isset($tables)) {
-		$selectHTML = '<select name="selTable" id="selTable" onchange="this.form.submit()">';
+		$selectHTML = '<select class="btn neon-button" name="selTable" id="selTable" onchange="this.form.submit()">';
 		foreach ($tables as $row) {
 			foreach ($row as $value) {
         if (isset($selectedTable) && $value == $selectedTable) {
