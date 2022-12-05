@@ -5,7 +5,7 @@
 require_once 'config.php';
 
 $conn = getDBConnection();
-checkIfDBExists();
+selectDB();
 
 
 function getDBConnection() {
@@ -15,14 +15,14 @@ function getDBConnection() {
     $notification = "Connection failed: " . $conn->connect_error; 
     exit();
   }
-  $conn->select_db('buchladen');
   return $conn;
 }
 
-function checkIfDBExists() {
+function selectDB() {
   global $conn;
-  $sql = 'SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = "buchladen"';
-  if ($conn->query($sql)->fetch_assoc() === null) {
+  try {
+    $conn->select_db('buchladen');
+  } catch (Exception $e) {
     resetDB();
   }
 }
