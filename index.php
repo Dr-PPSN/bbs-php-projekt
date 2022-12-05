@@ -1,14 +1,10 @@
 <?php
-    
+
 // Landing Page
 
 checkPHPVersion();
 
-if (isset($_POST['btnSQLInjection'])) {
-  // TODO: check if sql is select -> redirect to table.php with sql
-  // else display notification if successful or not
-  // $tableHTML = buildHtmlTable(executeSQL($_POST['sql-injection-text']));
-} else if (isset($_POST['btnReset'])) {
+if (isset($_POST['btnReset'])) {
   require './lib/DB.php';
   resetDB();
 }
@@ -71,7 +67,7 @@ function checkPHPVersion() {
           <form action="pages/alltables.php" method="get">
             <button type="submit" name="alltables" class="button" id="btnAllTables">Alle Tabellen anzeigen</button>
           </form>
-          <form action="pages/sqlinjection.php">
+          <form action="pages/sqlinjection.php" method="post">
             <button type="submit" name="sqlinjection" class="button" id="btnSQLInjection">SQL Injection</button>
           </form>
           <form action="" method="post">
@@ -106,5 +102,6 @@ function checkPHPVersion() {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="./js/notification.js"></script>
+    <?php if (isset($notification)) echo '<script>displayMessage("' . $notification . '");</script>' ?>
   </body>
 </html>
