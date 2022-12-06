@@ -2,8 +2,18 @@
 
 // Hilfsfunktionen für HTML-Rendering
 
-function buildHtmlTable($tableData, $showButtons = true) {
-  if (isset($tableData)) {
+function buildHtmlTable($tableData, $showButtons, $orderBy, $orderDirection) {
+  // Erstelle eine normale HTML-Tabelle, ohne geordnet zu sein
+  if ($orderBy == "" && $orderDirection == "") {
+    return createHTMLTable($tableData, $showButtons);
+  }
+  // Erstelle eine HTML-Tabelle, die geordnet ist
+  else {
+    
+  }
+}
+function createHTMLTable($tableData, $showButtons){
+    if (isset($tableData)) {
     $colNames = array_keys($tableData[0]);
     $thHTML = '<tr>';
     foreach ($colNames as $colName) {
