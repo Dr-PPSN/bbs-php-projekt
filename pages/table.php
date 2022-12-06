@@ -5,26 +5,37 @@
 require '../lib/sql.php';
 require '../lib/html-helper.php';
 
-$tableHTML = '';
+$orderBy = ""; // Spalte nach der sortiert werden soll
+$orderDirection = ""; // Sortierrichtung (ASC oder DESC)
+$tableHTML = ''; // HTML-Code für die Tabelle
+
+if (isset($_GET['orderBy'])) {
+  $orderBy = $_GET['orderBy'];
+}
+
+if (isset($_GET['orderDirection'])) {
+  $orderDirection = $_GET['orderDirection'];
+}
+
 if (isset($_GET['table'])) {
   switch ($_GET['table']) {
     case 'buecher':
-      $tableHTML = buildHtmlTable(getBuecher());
+      $tableHTML = buildHtmlTable(getBuecher(), true, $orderBy, $orderDirection);
       break;
     case 'autoren':
-      $tableHTML = buildHtmlTable(getAutoren());
+      $tableHTML = buildHtmlTable(getAutoren(), true, $orderBy, $orderDirection);
       break;
     case 'sparten':
-      $tableHTML = buildHtmlTable(getSparten());
+      $tableHTML = buildHtmlTable(getSparten(), true, $orderBy, $orderDirection);
       break;
     case 'verlage':
-      $tableHTML = buildHtmlTable(getVerlage());
+      $tableHTML = buildHtmlTable(getVerlage(), true, $orderBy, $orderDirection);
       break;
     case 'lieferanten':
-      $tableHTML = buildHtmlTable(getLieferanten());
+      $tableHTML = buildHtmlTable(getLieferanten(), true, $orderBy, $orderDirection);
       break;
     case 'orte':
-      $tableHTML = buildHtmlTable(getOrte());
+      $tableHTML = buildHtmlTable(getOrte(), true, $orderBy, $orderDirection);
       break;
     default:
       header('Location: index.php');
