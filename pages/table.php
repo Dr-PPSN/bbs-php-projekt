@@ -88,7 +88,6 @@ if (isset($_GET['table'])) {
       if (isset($notification)){
         echo '<script>displayMessage("' . $notification . '");</script>';
       }
-      echo $_SESSION['orderDirection'];
     ?>
   </body>
 </html>

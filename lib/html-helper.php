@@ -9,9 +9,7 @@ function buildHtmlTable($tableData, $showButtons, $orderBy, $orderDirection) {
   }
   // Erstelle eine HTML-Tabelle, die geordnet ist
   else {
-
-    // TODO: Sortiere die Daten nach $orderBy und $orderDirection
-
+    $tableData = orderTableData($tableData, $orderBy, $orderDirection);
     return createHTMLTable($tableData, $showButtons);
   }
 }
@@ -55,6 +53,18 @@ function createHTMLTable($tableData, $showButtons){
     return $tableHTML;
   }
 }
+function orderTableData($tableData, $orderBy, $orderDirection){
+  // Ein Algorithmus, der die Daten nach $orderBy und $orderDirection sortiert und dann die createHTMLTable-Funktion aufruft
+    
+    if ($orderDirection == "ASC") {
+      array_multisort(array_column($tableData, $orderBy), SORT_ASC, $tableData);
+    }
+    else if ($orderDirection == "DESC") {
+      array_multisort(array_column($tableData, $orderBy), SORT_DESC, $tableData);
+    }
+    return $tableData;
+}
+
 function ascORdesc($value) {
   if ($value == "ASC") {
     return "DESC";
