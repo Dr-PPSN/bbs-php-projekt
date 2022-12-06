@@ -1,6 +1,9 @@
   body {
     font-family: "Helvetica Neue", sans-serif;
   }
+  a{
+    text-decoration: none;
+  }
 
 .neonTextFlickerGreen{
     animation: flicker 1.5s infinite alternate;
