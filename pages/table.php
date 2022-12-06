@@ -5,17 +5,28 @@
 require '../lib/sql.php';
 require '../lib/html-helper.php';
 
-$orderBy = ""; // Spalte nach der sortiert werden soll
-$orderDirection = ""; // Sortierrichtung (ASC oder DESC)
+$orderBy = "null"; // Spalte nach der sortiert werden soll
+$orderDirection = "ASC"; // Sortierrichtung (ASC oder DESC)
 $tableHTML = ''; // HTML-Code für die Tabelle
+
 
 if (isset($_GET['orderBy'])) {
   $orderBy = $_GET['orderBy'];
+  if (isset($_GET['orderDirection'])) {
+    //$orderDirection = $_GET['orderDirection'];
+    // wenn die Sortierrichtung nicht gesetzt ist, dann ist sie ASC
+    if (!($_GET['orderDirection'] == "ASC" || $_GET['orderDirection'] == "DESC")) {
+      $orderDirection = "ASC";
+    }
+    else if ($_GET['orderDirection'] == "ASC") {
+      $orderDirection = "ASC";
+    }
+    else if ($_GET['orderDirection'] == "DESC") {
+      $orderDirection = "DESC";
+    }
+  }
 }
-
-if (isset($_GET['orderDirection'])) {
-  $orderDirection = $_GET['orderDirection'];
-}
+$_SESSION['orderDirection'] = $orderDirection; // Speichere die Sortierrichtung in der Session, damit sie in der nächsten Seite wieder verwendet werden kann
 
 if (isset($_GET['table'])) {
   switch ($_GET['table']) {
@@ -73,6 +84,11 @@ if (isset($_GET['table'])) {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="../js/notification.js"></script>
-    <?php if (isset($notification)) echo '<script>displayMessage("' . $notification . '");</script>' ?>
+    <?php
+      if (isset($notification)){
+        echo '<script>displayMessage("' . $notification . '");</script>';
+      }
+      echo $_SESSION['orderDirection'];
+    ?>
   </body>
 </html>
