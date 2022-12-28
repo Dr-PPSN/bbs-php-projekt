@@ -15,3 +15,5 @@ TODO
 
 - Add: Home Button (Kai)
 - Add: Alle Tabellen anzeigen (auch Referenztabellen) mit Dropdown (Kai)
+- Add: Fußzeile -> Gruppenmitglieder (Kai)
+- Edit: Kopfzeile -> SQL-Injection btn & DB zurücksetzen (Kai)
