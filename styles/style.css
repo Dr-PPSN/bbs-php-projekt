@@ -2,9 +2,6 @@
     font-family: "Helvetica Neue", sans-serif;
     height: 100%;
   }
-  a{
-    text-decoration: none;
-  }
 
 .neonTextFlickerGreen{
     animation: flicker 1.5s infinite alternate;
@@ -138,4 +135,3 @@
   .neon-button:focus::after {
     opacity: 1;
   }
-  
