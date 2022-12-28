@@ -29,7 +29,7 @@ function checkPHPVersion() {
     <link rel="stylesheet" type="text/css" href="./styles/style.css">
   </head>
   <body>
-    <div class="container-fluid h-100 bg-dark">
+    <div class="container-fluid vh-100 bg-dark">
       <!-- Menue -->
       <div class="row bg-dark">
         <div class="col-md-7 col-sm-6 col-xs-4 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen">
@@ -37,9 +37,9 @@ function checkPHPVersion() {
         </div>
         <div class="col-md-5 col-sm-6 col-xs-8 d-flex align-items-center justify-content-center">
           <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
-            <a class="btn neon-button" data-toggle="modal" data-target="#sql_injection_modal">
-              SQL-Injection
-            </a>
+            <form action="pages/sqlinjection.php" method="post">
+              <button type="submit" name="sqlinjection" class="btn neon-button" id="btnSQLInjection">SQL Injection</button>
+            </form>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
             <form action="" method="post">
@@ -51,10 +51,7 @@ function checkPHPVersion() {
       <!-- /Menue -->
       <!-- Row1 -->
       <div class="row bg-dark py-3">
-        <div class="col-md-6 col-sm-6 col-xs-6 h3 d-flex align-items-center justify-content-center neonTextRed">
-          Datenbank auswählen:
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
+        <div class="col-md-9 col-sm-9 col-xs-10 d-flex align-items-center justify-content-center">
           <!-- TODO: Button für Tabellenauswahl hinzufügen -->
           <form action="pages/table.php" method="get">
             <button type="submit" name="table" class="button" id="btnTable" value="buecher">Bücher</button>
@@ -64,18 +61,24 @@ function checkPHPVersion() {
             <button type="submit" name="table" class="button" id="btnTable" value="lieferanten">Lieferanten</button>
             <button type="submit" name="table" class="button" id="btnTable" value="orte">Orte</button>
           </form>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-2 d-flex align-items-center justify-content-center mt-3">
           <form action="pages/alltables.php" method="get">
             <button type="submit" name="alltables" class="button" id="btnAllTables">Alle Tabellen anzeigen</button>
-          </form>
-          <form action="pages/sqlinjection.php" method="post">
-            <button type="submit" name="sqlinjection" class="button" id="btnSQLInjection">SQL Injection</button>
-          </form>
-          <form action="" method="post">
-            <button type="submit" name="btnReset" class="button" id="btnReset" value="">Datenbank zurücksetzen</button>
           </form>
         </div>
       </div>
       <!-- /Row1 -->
+      <!-- footer -->
+      <div class="row bg-dark fixed-bottom">
+        <hr>
+        <div class="col-md-4 col-sm-4 col-xs-4 d-flex align-items-center justify-content-center">
+          <p class="text-white">© 2023 - BBS PHP Projekt</p>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-8 d-flex align-items-center justify-content-center">
+          <p class="text-white">Robert, Kai und Dennis</p>
+        </div>
+      </div>
     </div>
     <!-- Modal SQL-Injection -->
       <div class="modal fade" id="sql_injection_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
