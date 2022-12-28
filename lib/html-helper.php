@@ -82,4 +82,26 @@ function drawArrow() {
   }
 }
 
+function buildSelect($tableData, $selectedValue) {
+  $selectHTML = '<select name="table" class="form-control" onchange="this.form.submit()">';
+  for ($i = 0; $i < count($tableData); $i++) {
+    $value = array_values($tableData[$i])[0];
+    $selectHTML .= '<option value="' . $value . '"';
+    if ($selectedValue == $value) {
+      $selectHTML .= ' selected';
+    }
+    $selectHTML .= '>' . $value . '</option>';
+  }
+  $selectHTML .= '</select>';
+  return $selectHTML;
+}
+
+function getEditPopup($columnTypes) {
+  // TODO: design popup with bootstrap
+}
+
+function getInsertPopup($columnTypes) {
+  // TODO: design popup with bootstrap
+}
+
 ?>

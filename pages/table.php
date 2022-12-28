@@ -7,8 +7,7 @@ require '../lib/html-helper.php';
 
 $orderBy = "null"; // Spalte nach der sortiert werden soll
 $orderDirection = "ASC"; // Sortierrichtung (ASC oder DESC)
-$tableHTML = ''; // HTML-Code für die Tabelle
-
+$tableHTML = '';
 
 if (isset($_GET['orderBy'])) {
   $orderBy = $_GET['orderBy'];
@@ -26,33 +25,21 @@ if (isset($_GET['orderBy'])) {
     }
   }
 }
-$_SESSION['orderDirection'] = $orderDirection; // Speichere die Sortierrichtung in der Session, damit sie in der nächsten Seite wieder verwendet werden kann
+$_SESSION['orderDirection'] = $orderDirection;
+// Speichere die Sortierrichtung in der Session, damit sie in der nächsten Seite wieder verwendet werden kann
 
-if (isset($_GET['table'])) {
-  switch ($_GET['table']) {
-    case 'buecher':
-      $tableHTML = buildHtmlTable(getBuecher(), true, $orderBy, $orderDirection);
-      break;
-    case 'autoren':
-      $tableHTML = buildHtmlTable(getAutoren(), true, $orderBy, $orderDirection);
-      break;
-    case 'sparten':
-      $tableHTML = buildHtmlTable(getSparten(), true, $orderBy, $orderDirection);
-      break;
-    case 'verlage':
-      $tableHTML = buildHtmlTable(getVerlage(), true, $orderBy, $orderDirection);
-      break;
-    case 'lieferanten':
-      $tableHTML = buildHtmlTable(getLieferanten(), true, $orderBy, $orderDirection);
-      break;
-    case 'orte':
-      $tableHTML = buildHtmlTable(getOrte(), true, $orderBy, $orderDirection);
-      break;
-    default:
-      header('Location: index.php');
-      exit();
-  }
+$allTables = getAllTables();
+// TODO: fehlermeldung falls keine Tabellen vorhanden sind
+if (isset($_GET['table']) && !empty($_GET['table'])) {
+  $selectedTable = $_GET['table'];
+} else {
+  $selectedTable = array_values($allTables[0])[0];
 }
+$selTableHTML   = buildSelect($allTables, $selectedTable);
+$tableHTML      = buildHtmlTable(getTable($selectedTable), true, $orderBy, $orderDirection);
+$columns          = getColumnTypes($selectedTable);
+$editPopupHTML    = getEditPopup($columns);
+$insertPopupHTML  = getInsertPopup($columns);
 
 ?>
 
@@ -71,6 +58,11 @@ if (isset($_GET['table'])) {
       <div class="col-md-7 col-sm-6 col-xs-4 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen">
         PHP Projekt Buchladen
       </div>
+      <form action="table.php" method="get" class="row bg-dark">
+        <div class="col-md-12 d-flex align-items-center justify-content-center">
+          <?php echo $selTableHTML ?>
+        </div>
+      </form>
       <!-- Die ausgewaelte Tabelle -->
       <div class="row bg-dark">
         <div class="col-md-12 d-flex align-items-center justify-content-center" id="tableElement">
@@ -79,6 +71,8 @@ if (isset($_GET['table'])) {
       </div>
       <!-- /Die ausgewaelte Tabelle -->
     </div>
+    <?php echo $editPopupHTML ?>
+    <?php echo $insertPopupHTML ?>
     <!-- import scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

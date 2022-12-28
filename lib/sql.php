@@ -161,16 +161,7 @@ function getOrte($id = null) {
 
 function getAllTables() {
   $SQL = '
-  SELECT
-    table_name
-  FROM 
-    information_schema.tables
-  WHERE
-    (table_type = "BASE TABLE")
-    AND
-    (table_schema = "buchladen")
-  ORDER BY
-    table_name
+  SHOW TABLES
   ';
   return executeSQL($SQL);
 }
@@ -182,6 +173,19 @@ function getTable($tableName) {
   FROM
   '. $tableName;
   return executeSQL($SQL);
+}
+
+function getColumnTypes($tableName) {
+  $SQL = '
+  SELECT
+    COLUMN_NAME,
+    DATA_TYPE
+  FROM
+    INFORMATION_SCHEMA.COLUMNS
+  WHERE
+    TABLE_NAME = ?
+  ';
+  return executeSQL($SQL, [$tableName]);
 }
 
 
