@@ -5,6 +5,13 @@
 require '../lib/sql.php';
 require '../lib/html-helper.php';
 
+if (isset($_POST['btnEdit'])) {
+  $id = $_POST['id'];
+  $table = $_POST['table'];
+  $values = $_POST['edit'];
+  updateTable($table, $id, $values);
+}
+
 $orderBy = "null"; // Spalte nach der sortiert werden soll
 $orderDirection = "ASC"; // Sortierrichtung (ASC oder DESC)
 $tableHTML = '';
@@ -42,12 +49,6 @@ $tableHTML = buildHtmlTable($rows, true, $orderBy, $orderDirection);
 $editPopupsHTML    = getEditPopup($selectedTable, $columnTypes, $rows);
 $insertPopupsHTML  = getInsertPopup($selectedTable, $columnTypes, $rows);
 
-if (isset($_POST['btnEdit'])) {
-  $id = $_POST['id'];
-  $table = $_POST['table'];
-  $values = $_POST['edit'];
-  updateTable($table, $id, $values);
-}
 
 ?>
 
