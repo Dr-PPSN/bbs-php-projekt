@@ -3,7 +3,7 @@ TODO
 - Add: Add, Edit & Del Buttons (Robert)
 - Edit: select bei Custom SQL (Robert)
 
-- Homepage überarbeiten (Kai)
+- Homepage überarbeiten (Kai) ✓
   - Hintergrundfarbe ✓
   - Buttons anordnen ✓
   - Buttons Styles (✓)
@@ -19,7 +19,7 @@ TODO
 - Edit: Kopfzeile -> SQL-Injection btn & DB zurücksetzen (Kai) ✓
 - Add: Überschrift als Home Button (Kai) ✓
 
-- Alle Tabellen auf Landing Page anzeigen (Kai)
-  - "Alle Tabellen anzeigen"-Button entfernen
-- Cursor anpassen (Kai)
-- SQL-Injection Button auf allen Seiten (Kai)
+- Alle Tabellen auf Landing Page anzeigen (Kai) ✓
+  - "Alle Tabellen anzeigen"-Button entfernen ✓
+- Cursor anpassen (Kai) ✓
+- SQL-Injection Button auf allen Seiten (Kai) ✓
