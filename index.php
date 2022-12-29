@@ -50,13 +50,12 @@ function checkPHPVersion() {
       </div>
       <!-- /Menue -->
       <!-- Row1 -->
-      <div class="row bg-dark py-5">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-5 bg-dark py-5">
 
         <?php
           $allTables = getAllTables();
           foreach ($allTables as $table) {
             $table = $table['Tables_in_buchladen'];
-            
             //call the getTable function for every table and save the result in a variable
             $tableData = getTable($table);
             //count how many rows are in the table
@@ -64,8 +63,8 @@ function checkPHPVersion() {
             //count how many columns are in the table
             $tableColumns = count($tableData[0]);
 
-            echo '<div class="col mt-4 ml-2">
-                    <div class="card text-center bg-transparent blueBorder" style="width: 18rem;">
+            echo '<div class="col mt-3 mt-md-5">
+                    <div class="card text-center bg-transparent blueBorder" style="width: 14rem;">
                       <div class="card-body">
                         <h4 class="card-title orangeText">' . $table . '</h4><br>
                         <p class="card-text greenText">Anzahl Attribute: ' . $tableColumns . '</p>
@@ -74,6 +73,14 @@ function checkPHPVersion() {
                       </div>
                     </div>
                   </div>';
+
+            // echo '<div class="col-12 col-md-6 col-lg-4">
+            //         <div class="card">
+            //           <div class="card-body">
+            //             Karte für Tabelle: '. $table . ';
+            //           </div>
+            //         </div>
+            //       </div>';
           }
         ?>
       </div>
