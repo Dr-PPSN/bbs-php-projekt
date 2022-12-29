@@ -68,12 +68,19 @@ if (isset($_GET['table'])) {
   </head>
   <body>
     <div class="container-fluid h-100 bg-dark">
-      <div class="col-md-7 col-sm-6 col-xs-4 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen">
-        PHP Projekt Buchladen
+      <div class="row bg-dark">
+        <div class="col-sm-11 col-md-10 col-sm-6 col-xs-4 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen" id="ueberschrift">
+          PHP Projekt Buchladen
+        </div>
+        <div class="col-sm-1 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2">
+          <form action="../index.php">
+            <button type="submit" class="btn neon-button">Zurück</button>
+          </form>
+        </div>
       </div>
       <!-- Die ausgewaelte Tabelle -->
       <div class="row bg-dark">
-        <div class="col-md-12 d-flex align-items-center justify-content-center" id="tableElement">
+        <div class="col-12 d-flex align-items-center justify-content-center" id="tableElement">
           <?php echo $tableHTML?>
         </div>
       </div>
@@ -84,6 +91,11 @@ if (isset($_GET['table'])) {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="../js/notification.js"></script>
+    <script>
+      $("#ueberschrift").click(function(){
+        window.location.href = "../index.php";
+      });
+    </script>
     <?php
       if (isset($notification)){
         echo '<script>displayMessage("' . $notification . '");</script>';
