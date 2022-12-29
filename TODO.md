@@ -1,8 +1,7 @@
 TODO
 
 - Add: Add, Edit & Del Buttons (Robert)
-- Edit: select bei Custom SQL (Robert)
-- Unique Key für Referenztabellen
+- edit für Referenztabellen (Robert)
 
 - Homepage überarbeiten (Kai) ✓
   - Hintergrundfarbe ✓
@@ -24,4 +23,7 @@ TODO
   - "Alle Tabellen anzeigen"-Button entfernen ✓
 - Cursor anpassen (Kai) ✓
 - SQL-Injection Button auf allen Seiten (Kai) ✓
+
 - Label mit Attributnamen (Kai)
+- SQL-Injection-Feld als mehrzeiliges Textfeld (Kai)
+- Edit: select bei Custom SQL (Kai)
