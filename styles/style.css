@@ -7,6 +7,7 @@
     animation: flicker 1.5s infinite alternate;
     color: #fff;
     font-family: neon;
+    cursor: pointer;
 }
 
 .neonTableHeader{
@@ -84,13 +85,37 @@
 
 :root {
     --clr-neon: hsl(317 100% 54%);
-    --clr-bg: rgb(226, 164, 213);
+    --clr-greenText: rgb(16, 223, 16);
+    --clr-orangeText: rgb(255, 165, 0);
+    --clr-redText: rgb(255, 0, 0);
+    --clr-blueBorder: rgb(0, 204, 255);
   }
   
   *,
   *::before,
   *::after {
     box-sizing: border-box;
+  }
+  .greenText{
+    color: var(--clr-greenText);
+    text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+  }
+  .orangeText{
+    color: var(--clr-orangeText);
+    text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+  }
+  .redText{
+    color: var(--clr-redText);
+    text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+  }
+
+  .blueBorder {
+    border: 1px solid var(--clr-blueBorder);
+    box-shadow: inset 0 0 0.5em 0 var(--clr-blueBorder), 0 0 0.5em 0 var(--clr-blueBorder);
+  }
+  .blueBorder:hover {
+    background-color: rgba(0, 217, 255, 0.235) !important;
+    cursor: pointer;
   }
   
  .neon-button {
@@ -127,8 +152,10 @@
   
   .neon-button:hover,
   .neon-button:focus {
-    background-color: var(--clr-bg);
+    background-color: var(--clr-neon);
+    color: white;
     text-shadow: none;
+    filter: drop-shadow(0 0 12px var(--clr-neon)) contrast(1) brightness(1);
   }
   
   .neon-button:hover::after,

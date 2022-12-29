@@ -1,11 +1,10 @@
 TODO
 
-- Fix: alle Tabellen anzeigen (Robert)
 - Add: Add, Edit & Del Buttons (Robert)
 - Edit: select bei Custom SQL (Robert)
 - Unique Key für Referenztabellen
 
-- Homepage überarbeiten (Kai)
+- Homepage überarbeiten (Kai) ✓
   - Hintergrundfarbe ✓
   - Buttons anordnen ✓
   - Buttons Styles (✓)
@@ -21,8 +20,8 @@ TODO
 - Edit: Kopfzeile -> SQL-Injection btn & DB zurücksetzen (Kai) ✓
 - Add: Überschrift als Home Button (Kai) ✓
 
-- Alle Tabellen auf Landing Page anzeigen (Kai)
-  - "Alle Tabellen anzeigen"-Button entfernen
-- Cursor anpassen (Kai)
-- SQL-Injection Button auf allen Seiten (Kai)
+- Alle Tabellen auf Landing Page anzeigen (Kai) ✓
+  - "Alle Tabellen anzeigen"-Button entfernen ✓
+- Cursor anpassen (Kai) ✓
+- SQL-Injection Button auf allen Seiten (Kai) ✓
 - Label mit Attributnamen (Kai)
