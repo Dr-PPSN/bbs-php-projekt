@@ -1,8 +1,6 @@
-  body {
+  body, html {
     font-family: "Helvetica Neue", sans-serif;
-  }
-  a{
-    text-decoration: none;
+    height: 100%;
   }
 
 .neonTextFlickerGreen{
@@ -137,4 +135,3 @@
   .neon-button:focus::after {
     opacity: 1;
   }
-  

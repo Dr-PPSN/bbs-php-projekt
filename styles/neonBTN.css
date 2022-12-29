@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+:root {
+    --clr-neon2: rgb(3, 251, 255);
+  }
+.neon-button-2
+{
+	position: relative;
+	display: inline-block;
+	padding: 25px 30px;
+	margin: 10px 20px;
+	color: var(--clr-neon2);
+	font-size: 24px;
+	text-decoration: none;
+	text-transform: uppercase;
+	overflow: hidden;
+	transition: 0.5s;
+	letter-spacing: 4px;
+}
+.neon-button-2:nth-child(1)
+{
+	filter: hue-rotate(290deg);
+}
+.neon-button-2:nth-child(3)
+{
+	filter: hue-rotate(110deg);
+}
+.neon-button-2:hover
+{
+	background: var(--clr-neon2);
+	color: #050801;
+	box-shadow: 0 0 5px var(--clr-neon2),
+				0 0 25px var(--clr-neon2),
+				0 0 50px var(--clr-neon2),
+				0 0 200px var(--clr-neon2);
+}
+.neon-button-2 span
+{
+	position: absolute;
+	display: block;
+}
+.neon-button-2 span:nth-child(1)
+{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, var(--clr-neon2));
+	animation: animate1 2s linear infinite;
+}
+@keyframes animate1
+{
+	0%
+	{
+		left: -100%;
+	}
+	50%, 100%
+	{
+		left: 100%;
+	}
+}
+.neon-button-2 span:nth-child(2)
+{
+	top: -100px;
+	right: 0;
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(180deg, transparent, var(--clr-neon2));
+	animation: animate2 2s linear infinite;
+	animation-delay: 0.5s;
+}
+@keyframes animate2
+{
+	0%
+	{
+		top: -100%;
+	}
+	50%, 100%
+	{
+		top: 100%;
+	}
+}
+.neon-button-2 span:nth-child(3)
+{
+	bottom: 0;
+	right: -100%;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(270deg, transparent, var(--clr-neon2));
+	animation: animate3 2s linear infinite;
+	animation-delay: 1s;
+}
+@keyframes animate3
+{
+	0%
+	{
+		right: -100%;
+	}
+	50%, 100%
+	{
+		right: 100%;
+	}
+}
+.neon-button-2 span:nth-child(4)
+{
+	bottom: -100%;
+	left: 0;
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(360deg, transparent, var(--clr-neon2));
+	animation: animate4 2s linear infinite;
+	animation-delay: 1.5s;
+}
+@keyframes animate4
+{
+	0%
+	{
+		bottom: -100%;
+	}
+	50%, 100%
+	{
+		bottom: 100%;
+	}
+}

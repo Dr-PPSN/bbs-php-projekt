@@ -1,5 +1,6 @@
 <?php
-
+require 'lib/sql.php';
+require 'lib/html-helper.php';
 // Landing Page
 
 checkPHPVersion();
@@ -27,19 +28,20 @@ function checkPHPVersion() {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./styles/message.css">
     <link rel="stylesheet" type="text/css" href="./styles/style.css">
+    <link rel="stylesheet" type="text/css" href="./styles/neonBTN.css">
   </head>
   <body>
-    <div class="container-fluid h-100 bg-dark">
+    <div class="container-fluid vh-100 bg-dark">
       <!-- Menue -->
       <div class="row bg-dark">
-        <div class="col-md-7 col-sm-6 col-xs-4 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen">
+        <div class="col-md-7 col-sm-6 col-xs-4 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen" id="ueberschrift">
           PHP Projekt Buchladen
         </div>
         <div class="col-md-5 col-sm-6 col-xs-8 d-flex align-items-center justify-content-center">
           <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
-            <a class="btn neon-button" data-toggle="modal" data-target="#sql_injection_modal">
-              SQL-Injection
-            </a>
+            <form action="pages/sqlinjection.php" method="post">
+              <button type="submit" name="sqlinjection" class="btn neon-button" id="btnSQLInjection">SQL Injection</button>
+            </form>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
             <form action="" method="post">
@@ -50,32 +52,44 @@ function checkPHPVersion() {
       </div>
       <!-- /Menue -->
       <!-- Row1 -->
-      <div class="row bg-dark py-3">
-        <div class="col-md-6 col-sm-6 col-xs-6 h3 d-flex align-items-center justify-content-center neonTextRed">
-          Datenbank auswählen:
+      <div class="row bg-dark py-5">
+        <div class="col-md-8 col-sm-8 col-xs-8 d-flex align-items-center justify-content-center">
+          <div class="btn-group-vertical">
+            <a href="/pages/table.php?table=buecher" class="neon-button-2"><span></span><span></span><span></span><span></span>Bücher</a>
+            <a href="/pages/table.php?table=autoren" class="neon-button-2"><span></span><span></span><span></span><span></span>Autoren</a>
+            <a href="/pages/table.php?table=sparten" class="neon-button-2"><span></span><span></span><span></span><span></span>Sparten</a>
+            <a href="/pages/table.php?table=verlage" class="neon-button-2"><span></span><span></span><span></span><span></span>Verlage</a>
+            <a href="/pages/table.php?table=lieferanten" class="neon-button-2"><span></span><span></span><span></span><span></span>Lieferanten</a>
+            <a href="/pages/table.php?table=orte" class="neon-button-2"><span></span><span></span><span></span><span></span>Orte</a>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-6 d-flex align-items-center justify-content-center">
-          <!-- TODO: Button für Tabellenauswahl hinzufügen -->
-          <form action="pages/table.php" method="get">
-            <button type="submit" name="table" class="button" id="btnTable" value="buecher">Bücher</button>
-            <button type="submit" name="table" class="button" id="btnTable" value="autoren">Autoren</button>
-            <button type="submit" name="table" class="button" id="btnTable" value="sparten">Sparten</button>
-            <button type="submit" name="table" class="button" id="btnTable" value="verlage">Verlage</button>
-            <button type="submit" name="table" class="button" id="btnTable" value="lieferanten">Lieferanten</button>
-            <button type="submit" name="table" class="button" id="btnTable" value="orte">Orte</button>
-          </form>
-          <form action="pages/alltables.php" method="get">
-            <button type="submit" name="alltables" class="button" id="btnAllTables">Alle Tabellen anzeigen</button>
-          </form>
-          <form action="pages/sqlinjection.php" method="post">
-            <button type="submit" name="sqlinjection" class="button" id="btnSQLInjection">SQL Injection</button>
-          </form>
-          <form action="" method="post">
-            <button type="submit" name="btnReset" class="button" id="btnReset" value="">Datenbank zurücksetzen</button>
-          </form>
+        <div class="col-md-4 col-sm-4 col-xs-4 d-flex align-items-center justify-content-center mt-4">
+          <div class="dropdown">
+            <button class="btn neon-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Alle Tabellen
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <?php 
+                $tableDataAAAHHH = executeSQL("SELECT table_name FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema = 'buchladen'");
+                foreach ($tableDataAAAHHH as $table) {
+                  echo '<a class="dropdown-item" href="/pages/table.php?table=' . $table['table_name'] . '">' . $table['table_name'] . '</a>';
+                }
+              ?>
+            </div>
+          </div>
         </div>
       </div>
       <!-- /Row1 -->
+      <!-- footer -->
+      <div class="row bg-dark fixed-bottom">
+        <hr>
+        <div class="col-md-4 col-sm-4 col-xs-4 d-flex align-items-center justify-content-center">
+          <p class="text-white">© 2023 - BBS PHP Projekt</p>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-8 d-flex align-items-center justify-content-center">
+          <p class="text-white">Robert, Kai und Dennis</p>
+        </div>
+      </div>
     </div>
     <!-- Modal SQL-Injection -->
       <div class="modal fade" id="sql_injection_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -104,6 +118,11 @@ function checkPHPVersion() {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="./js/notification.js"></script>
+    <script>
+      $("#ueberschrift").click(function(){
+        window.location.href = "../index.php";
+      });
+    </script>
     <?php if (isset($notification)) echo '<script>displayMessage("' . $notification . '");</script>' ?>
   </body>
 </html>
