@@ -1,6 +1,5 @@
 TODO
 
-- Fix: alle Tabellen anzeigen (Robert)
 - Add: Add, Edit & Del Buttons (Robert)
 - Edit: select bei Custom SQL (Robert)
 
