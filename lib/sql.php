@@ -13,7 +13,7 @@ function executeSQL($SQL, $params = null) {
       $result = $statement->get_result(); 
       if ($result === true) {
         return true;
-      } else if ($result === false) {
+      } else if ($result === false && $conn->error != '') {
         $notification = 'SQL Fehler: ' . $conn->error;
         return false;
       } else {
@@ -191,20 +191,19 @@ function getColumnTypes($tableName) {
 
 // ---------------------------- update tables -------------------------------------
 
-function updateTable($tableName, $id, $values) {
-  $SQL = '
-  UPDATE
-    ' . $tableName . '
-  SET';
+function updateTable(string $tableName, $id, array $values) {
+  $SQL = 'UPDATE ' . $tableName . ' SET';
   foreach ($values as $key => $value) {
-    $SQL .= $key . ' = ' . $value . ',';
+    $SQL .= ' ' . $key . ' = "' . $value . '",';
   }
   $SQL = substr($SQL, 0, -1);
-  $SQL .= '
-  WHERE
-    '. $tableName .'_id = ?
-  ';
+  $SQL .= ' WHERE ' . $tableName . '_id = ?';
+  echo $SQL;
   return executeSQL($SQL, [$id]);
+}
+
+function updateRefTable() {
+  // TODO: Update RefTable
 }
 
 

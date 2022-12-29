@@ -124,8 +124,9 @@ function getEditPopup($selectedTable, $columns, $rows) {
               <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag bearbeiten (ID=' . $id . ')</h5>
               <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
             </div>
-            <div class="modal-body">
-              <div class="form-group">';
+            <form action="" method="post">
+              <div class="modal-body">
+                <div class="form-group">';
     } else {
       $id = $i;
       $HTML = '
@@ -136,8 +137,9 @@ function getEditPopup($selectedTable, $columns, $rows) {
               <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag bearbeiten</h5>
               <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
             </div>
-            <div class="modal-body">
-              <div class="form-group">';
+            <form action="" method="post">
+              <div class="modal-body">
+                <div class="form-group">';
     }
 
     for ($j = 1; $j < count($row); $j++) {
@@ -145,14 +147,17 @@ function getEditPopup($selectedTable, $columns, $rows) {
       $val  = array_values($row)[$j];
       $type = getColumnType($columns, $key);
       $HTML .= '<span>' . $key . '</span>';
-      $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="edit-' . $key . '" name="edit-' . $key . '" value="' . $val . '">';
+      $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="edit-' . $key . '" name="edit[' . $key . ']" value="' . $val . '">';
     }
     $HTML .= '
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <input type="submit" class="btn btn-success" name="btnEdit" id="editSubmit" value="OK">
-          </div>
+            <div class="modal-footer">
+              <input type="hidden" name="table" value="' . $selectedTable . '">
+              <input type="hidden" name="id" value="' . $id . '">
+              <input type="submit" class="btn btn-success" name="btnEdit" id="editSubmit" value="OK">
+            </div>
+          </form>
         </div>
       </div>
     </div>';

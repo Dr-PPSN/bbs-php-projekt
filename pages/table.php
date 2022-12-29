@@ -42,6 +42,13 @@ $tableHTML = buildHtmlTable($rows, true, $orderBy, $orderDirection);
 $editPopupsHTML    = getEditPopup($selectedTable, $columnTypes, $rows);
 $insertPopupsHTML  = getInsertPopup($selectedTable, $columnTypes, $rows);
 
+if (isset($_POST['btnEdit'])) {
+  $id = $_POST['id'];
+  $table = $_POST['table'];
+  $values = $_POST['edit'];
+  updateTable($table, $id, $values);
+}
+
 ?>
 
 <!DOCTYPE html>
