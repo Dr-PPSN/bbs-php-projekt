@@ -112,21 +112,37 @@ function buildSelect($tableData, $selectedValue) {
 
 function getEditPopup($selectedTable, $columns, $rows) {
   $editPopups = array();
-  foreach ($rows as $row) {
-    $id = $row[$selectedTable . "_id"];
-    $HTML = '
-    <div class="modal fade" id="editPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag bearbeiten (ID=' . $id . ')</h5>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">';
-    for ($i = 1; $i < count($row); $i++) {
-      $key  = array_keys($row)[$i];
-      $val  = array_values($row)[$i];
+  for ($i = 0; $i < count($rows); $i++) {
+    $row = $rows[$i];
+    if (isset($row[$selectedTable . "_id"])) {
+      $id = $row[$selectedTable . "_id"];
+      $HTML = '
+      <div class="modal fade" id="editPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag bearbeiten (ID=' . $id . ')</h5>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">';
+    } else {
+      $id = $i;
+      $HTML = '
+      <div class="modal fade" id="editPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag bearbeiten</h5>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">';
+    }
+
+    for ($j = 1; $j < count($row); $j++) {
+      $key  = array_keys($row)[$j];
+      $val  = array_values($row)[$j];
       $type = getColumnType($columns, $key);
       $HTML .= '<span>' . $key . '</span>';
       $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="edit-' . $key . '" name="edit-' . $key . '" value="' . $val . '">';

@@ -191,20 +191,33 @@ function getColumnTypes($tableName) {
 
 // ---------------------------- update tables -------------------------------------
 
-
-function updateOrte(int $id, array $values) {
+function updateTable($tableName, $id, $values) {
   $SQL = '
   UPDATE
-    orte o
-  SET
-    o.postleitzahl = ?,
-    o.name = ?
+    ' . $tableName . '
+  SET';
+  foreach ($values as $key => $value) {
+    $SQL .= $key . ' = ' . $value . ',';
+  }
+  $SQL = substr($SQL, 0, -1);
+  $SQL .= '
   WHERE
-    o.orte_id = ?
+    '. $tableName .'_id = ?
   ';
-  return executeSQL($SQL, [$values, $id]);
+  return executeSQL($SQL, [$id]);
 }
 
-// TODO: update-function for every table --> gets used in edit.php
+
+// ---------------------------- delete tables -------------------------------------
+
+function deleteFromTable($tableName, $id) {
+  $SQL = '
+  DELETE FROM
+    '. $tableName .'
+  WHERE
+    '. $tableName .'_id = ?
+  ';
+  return executeSQL($SQL, [$id]);
+}
 
 ?>
