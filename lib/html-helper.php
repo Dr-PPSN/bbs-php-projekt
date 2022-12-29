@@ -13,8 +13,9 @@ function buildHtmlTable($tableData, $showButtons, $orderBy, $orderDirection) {
     return createHTMLTable($tableData, $showButtons);
   }
 }
+
 function createHTMLTable($tableData, $showButtons){
-    if (isset($tableData)) {
+  if (isset($tableData)) {
     $colNames = array_keys($tableData[0]);
     $thHTML = '<tr>';
     foreach ($colNames as $colName) {
@@ -44,8 +45,19 @@ function createHTMLTable($tableData, $showButtons){
         $trHTML .= '<td>' . $val . '</td>';
       }
       if ($showButtons) {
-        $trHTML .= '<td><button>Edit</button></td>';
-        $trHTML .= '<td><button>Del</button></td>';
+        $id = array_values($row)[0];
+        $trHTML .= '
+          <td>
+            <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#editPopup' . $id . '">
+              Edit
+            </a>
+          </td>';
+        $trHTML .= '
+          <td>
+            <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#delPopup' . $id . '">
+              Del
+            </a>
+          </td>';
       }
       $trHTML .= '</tr>';
     }
@@ -53,6 +65,7 @@ function createHTMLTable($tableData, $showButtons){
     return $tableHTML;
   }
 }
+
 function orderTableData($tableData, $orderBy, $orderDirection){
   // Ein Algorithmus, der die Daten nach $orderBy und $orderDirection sortiert und dann die createHTMLTable-Funktion aufruft
     
@@ -73,6 +86,7 @@ function ascORdesc($value) {
     return "ASC";
   }
 }
+
 function drawArrow() {
   if ($_SESSION['orderDirection'] == "ASC") {
     return "▲";
@@ -96,41 +110,75 @@ function buildSelect($tableData, $selectedValue) {
   return $selectHTML;
 }
 
-function getEditPopup($columns, $rows) {
+function getEditPopup($selectedTable, $columns, $rows) {
+  $editPopups = array();
   foreach ($rows as $row) {
+    $id = $row[$selectedTable . "_id"];
     $HTML = '
-    <div class="modal fade" id="editPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="editPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag bearbeiten</h5>
+            <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag bearbeiten (ID=' . $id . ')</h5>
             <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
           </div>
           <div class="modal-body">
             <div class="form-group">';
-
-    foreach ($row as $val) {
-      // TODO: Columns einfügen
-      $HTML .= '<input type="text" class="form-control" id="sql-injection-text" name="sql-injection-text" placeholder="SQL">';
+    for ($i = 1; $i < count($row); $i++) {
+      $key  = array_keys($row)[$i];
+      $val  = array_values($row)[$i];
+      $type = getColumnType($columns, $key);
+      $HTML .= '<span>' . $key . '</span>';
+      $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="edit-' . $key . '" name="edit-' . $key . '" value="' . $val . '">';
     }
-
     $HTML .= '
             </div>
           </div>
           <div class="modal-footer">
-            <input type="submit" class="btn btn-success" name="btnSQLInjection" id="sql-injection-senden" value="SQL Senden">
+            <input type="submit" class="btn btn-success" name="btnEdit" id="editSubmit" value="OK">
           </div>
         </div>
       </div>
     </div>';
+    $editPopups[] = $HTML;
   }
+
+  $HTML = implode("", $editPopups);
   return $HTML;
 }
 
 
-function getInsertPopup($columns, $rows) {
-  // TODO: design popup with bootstrap
-  return "Edit Popup";
+function getInsertPopup($selectedTable, $columns, $rows) {
+  // TODO: design popup
+  return "Insert Popup";
+}
+
+function getDelPopup($selectedTable, $rows) {
+  // TODO: design popup
+  return "Del Popup";
+}
+
+function getColumnType($columnTypeList, $columnName) {
+  foreach ($columnTypeList as $column) {
+    if ($column['COLUMN_NAME'] == $columnName) {
+      return getHTMLInputType($column['DATA_TYPE']);
+    }
+  }
+}
+
+function getHTMLInputType($sqlType) {
+  switch ($sqlType) {
+    case 'int':
+      return 'number';
+    case 'decimal':
+      return 'number';
+    case 'varchar':
+      return 'text';
+    case 'text':
+      return 'textarea';
+    default:
+      return 'text';
+  }
 }
 
 ?>

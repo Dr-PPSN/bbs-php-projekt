@@ -35,12 +35,12 @@ if (isset($_GET['table']) && !empty($_GET['table'])) {
 } else {
   $selectedTable = array_values($allTables[0])[0];
 }
-$selTableHTML   = buildSelect($allTables, $selectedTable);
-$tableHTML      = buildHtmlTable(getTable($selectedTable), true, $orderBy, $orderDirection);
-$columns          = getColumnTypes($selectedTable);
-$rows = null;
-$editPopupHTML    = getEditPopup($columns, $rows);
-$insertPopupHTML  = getInsertPopup($columns, $rows);
+$rows         = getTable($selectedTable);
+$columnTypes  = getColumnTypes($selectedTable);
+$selHTML   = buildSelect($allTables, $selectedTable);
+$tableHTML = buildHtmlTable($rows, true, $orderBy, $orderDirection);
+$editPopupsHTML    = getEditPopup($selectedTable, $columnTypes, $rows);
+$insertPopupsHTML  = getInsertPopup($selectedTable, $columnTypes, $rows);
 
 ?>
 
@@ -68,7 +68,7 @@ $insertPopupHTML  = getInsertPopup($columns, $rows);
       </div>
       <form action="table.php" method="get" class="row bg-dark">
         <div class="col-md-12 d-flex align-items-center justify-content-center">
-          <?php echo $selTableHTML ?>
+          <?php echo $selHTML ?>
         </div>
       </form>
       <!-- Die ausgewaelte Tabelle -->
@@ -79,8 +79,8 @@ $insertPopupHTML  = getInsertPopup($columns, $rows);
       </div>
       <!-- /Die ausgewaelte Tabelle -->
     </div>
-    <?php echo $editPopupHTML ?>
-    <?php echo $insertPopupHTML ?>
+    <?php echo $editPopupsHTML ?>
+    <?php echo $insertPopupsHTML ?>
     <!-- import scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
