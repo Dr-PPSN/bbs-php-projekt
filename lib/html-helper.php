@@ -128,7 +128,7 @@ function getEditPopup($columns, $rows) {
 }
 
 
-function getInsertPopup($columns) {
+function getInsertPopup($columns, $rows) {
   // TODO: design popup with bootstrap
   return "Edit Popup";
 }

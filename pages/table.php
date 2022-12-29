@@ -38,8 +38,9 @@ if (isset($_GET['table']) && !empty($_GET['table'])) {
 $selTableHTML   = buildSelect($allTables, $selectedTable);
 $tableHTML      = buildHtmlTable(getTable($selectedTable), true, $orderBy, $orderDirection);
 $columns          = getColumnTypes($selectedTable);
-$editPopupHTML    = getEditPopup($columns);
-$insertPopupHTML  = getInsertPopup($columns);
+$rows = null;
+$editPopupHTML    = getEditPopup($columns, $rows);
+$insertPopupHTML  = getInsertPopup($columns, $rows);
 
 ?>
 
