@@ -81,22 +81,20 @@ function checkPHPVersion() {
       </div>
     </div>
     <!-- Modal SQL-Injection -->
-      <div class="modal fade" id="sql_injection_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Auszuführendes SQL hier eingeben</h5>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="sql-injection-text" name="sql-injection-text" placeholder="SQL">
-                </div>
-              </div>
-              <div class="modal-footer">
-                <input type="submit" class="btn btn-success" name="btnSQLInjection" id="sql-injection-senden" value="SQL Senden">
-              </div>
+    <div class="modal fade" id="sql_injection_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Auszuführendes SQL hier eingeben</h5>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="text" class="form-control" id="sql-injection-text" name="sql-injection-text" placeholder="SQL">
             </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-success" name="btnSQLInjection" id="sql-injection-senden" value="SQL Senden">
           </div>
         </div>
       </div>
