@@ -13,8 +13,10 @@ function executeSQL($SQL, $params = null) {
       $result = $statement->get_result(); 
       if ($result === true) {
         return true;
-      } else if ($result === false && $conn->error != '') {
-        $notification = 'SQL Fehler: ' . $conn->error;
+      } else if ($result === false) {
+        if (!($conn->error != '')) {
+          $notification = 'SQL Fehler: ' . $conn->error;
+        }
         return false;
       } else {
         $tableData = [];
