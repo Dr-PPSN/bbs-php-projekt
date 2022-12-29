@@ -62,10 +62,10 @@ $insertPopupHTML  = getInsertPopup($columns, $rows);
             <button type="submit" class="btn neon-button">Zurück</button>
           </form>
         </div>
-        <div class="col-sm-7 col-md-8 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen" id="ueberschrift">
-          PHP Projekt Buchladen
+        <div class="col-sm-6 col-md-8 py-4 h1 neonTextFlickerGreen" id="ueberschrift">
+          <div class="d-flex align-items-center justify-content-center text-center">PHP Projekt Buchladen</div>
         </div>
-        <div class="col-sm-2 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
+        <div class="col-sm-3 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
           <form action="pages/sqlinjection.php" method="post">
             <button type="submit" name="sqlinjection" class="btn neon-button" id="btnSQLInjection">SQL Injection</button>
           </form>
