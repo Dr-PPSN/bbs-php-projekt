@@ -19,3 +19,8 @@ TODO
 - Add: Fußzeile -> Gruppenmitglieder (Kai) ✓
 - Edit: Kopfzeile -> SQL-Injection btn & DB zurücksetzen (Kai) ✓
 - Add: Überschrift als Home Button (Kai) ✓
+
+- Alle Tabellen auf Landing Page anzeigen (Kai)
+  - "Alle Tabellen anzeigen"-Button entfernen
+- Cursor anpassen (Kai)
+- SQL-Injection Button auf allen Seiten (Kai)
