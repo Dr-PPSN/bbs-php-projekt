@@ -63,7 +63,7 @@ function checkPHPVersion() {
             //count how many columns are in the table
             $tableColumns = count($tableData[0]);
 
-            echo '<div class="col mt-3 mt-md-5">
+            echo '<div class="col mt-3 mt-md-5 d-flex align-items-center justify-content-center">
                     <div class="card text-center bg-transparent blueBorder" style="width: 14rem;">
                       <div class="card-body">
                         <h4 class="card-title orangeText">' . $table . '</h4><br>
