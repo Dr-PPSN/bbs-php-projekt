@@ -14,7 +14,7 @@ function executeSQL($SQL, $params = null) {
       if ($result === true) {
         return true;
       } else if ($result === false) {
-        if (!($conn->error != '')) {
+        if ($conn->error != '') {
           $notification = 'SQL Fehler: ' . $conn->error;
         }
         return false;
@@ -26,11 +26,15 @@ function executeSQL($SQL, $params = null) {
         return $tableData;
       }
     } else {
-      $notification = 'SQL Fehler: ' . $conn->error;
+      if ($conn->error != '') {
+        $notification = 'SQL Fehler: ' . $conn->error;
+      }
       return false;
     }
   } catch (Exception $e) {
-    $notification = 'SQL Fehler: ' . $conn->error;
+    if ($conn->error != '') {
+      $notification = 'SQL Fehler: ' . $conn->error;
+    }
     return false;
   }
 }
@@ -200,7 +204,6 @@ function updateTable(string $tableName, $id, array $values) {
   }
   $SQL = substr($SQL, 0, -1);
   $SQL .= ' WHERE ' . $tableName . '_id = ?';
-  echo $SQL;
   return executeSQL($SQL, [$id]);
 }
 
