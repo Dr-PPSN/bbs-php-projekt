@@ -1,5 +1,6 @@
 <?php
-
+require 'lib/sql.php';
+require 'lib/html-helper.php';
 // Landing Page
 
 checkPHPVersion();
@@ -33,7 +34,7 @@ function checkPHPVersion() {
     <div class="container-fluid vh-100 bg-dark">
       <!-- Menue -->
       <div class="row bg-dark">
-        <div class="col-md-7 col-sm-6 col-xs-4 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen">
+        <div class="col-md-7 col-sm-6 col-xs-4 py-4 h1 d-flex align-items-center justify-content-center neonTextFlickerGreen" id="ueberschrift">
           PHP Projekt Buchladen
         </div>
         <div class="col-md-5 col-sm-6 col-xs-8 d-flex align-items-center justify-content-center">
@@ -63,9 +64,19 @@ function checkPHPVersion() {
           </div>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-4 d-flex align-items-center justify-content-center mt-4">
-          <form action="pages/alltables.php" method="get">
-            <button type="submit" name="alltables" class="btn neon-button" id="btnAllTables">Alle Tabellen anzeigen</button>
-          </form>
+          <div class="dropdown">
+            <button class="btn neon-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Alle Tabellen
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <?php 
+                $tableDataAAAHHH = executeSQL("SELECT table_name FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema = 'buchladen'");
+                foreach ($tableDataAAAHHH as $table) {
+                  echo '<a class="dropdown-item" href="/pages/table.php?table=' . $table['table_name'] . '">' . $table['table_name'] . '</a>';
+                }
+              ?>
+            </div>
+          </div>
         </div>
       </div>
       <!-- /Row1 -->
@@ -105,6 +116,11 @@ function checkPHPVersion() {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="./js/notification.js"></script>
+    <script>
+      $("#ueberschrift").click(function(){
+        window.location.href = "../index.php";
+      });
+    </script>
     <?php if (isset($notification)) echo '<script>displayMessage("' . $notification . '");</script>' ?>
   </body>
 </html>
