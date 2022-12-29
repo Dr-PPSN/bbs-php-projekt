@@ -65,17 +65,42 @@ function createHTMLTable($tableData, $showButtons){
     return $tableHTML;
   }
 }
-
-function orderTableData($tableData, $orderBy, $orderDirection){
-  // Ein Algorithmus, der die Daten nach $orderBy und $orderDirection sortiert und dann die createHTMLTable-Funktion aufruft
+// function orderTableData($tableData, $orderBy, $orderDirection){
+//   // Ein Algorithmus, der die Daten nach $orderBy und $orderDirection sortiert und dann die createHTMLTable-Funktion aufruft
     
-    if ($orderDirection == "ASC") {
-      array_multisort(array_column($tableData, $orderBy), SORT_ASC, $tableData);
+//     if ($orderDirection == "ASC") {
+//       array_multisort(array_column($tableData, $orderBy), SORT_ASC, $tableData);
+//     }
+//     else if ($orderDirection == "DESC") {
+//       array_multisort(array_column($tableData, $orderBy), SORT_DESC, $tableData);
+//     }
+//     return $tableData;
+// }
+// /\
+// ||   Man könnte auch die Funktion array_multisort() verwenden, um die Daten zu sortieren...aber dürfen wir ja nicht 
+// ||
+function orderTableData($tableData, $orderBy, $orderDirection) {
+  $n = count($tableData);
+  for ($i = 0; $i < $n - 1; $i++) {
+    for ($j = 0; $j < $n - $i - 1; $j++) {
+      if ($orderDirection === 'ASC') {
+        if ($tableData[$j][$orderBy] > $tableData[$j + 1][$orderBy]) {
+          swap($tableData[$j], $tableData[$j + 1]);
+        }
+      } else {
+        if ($tableData[$j][$orderBy] < $tableData[$j + 1][$orderBy]) {
+          swap($tableData[$j], $tableData[$j + 1]);
+        }
+      }
     }
-    else if ($orderDirection == "DESC") {
-      array_multisort(array_column($tableData, $orderBy), SORT_DESC, $tableData);
-    }
-    return $tableData;
+  }
+  return $tableData;
+}
+
+function swap(&$a, &$b) {
+  $temp = $a;
+  $a = $b;
+  $b = $temp;
 }
 
 function ascORdesc($value) {
