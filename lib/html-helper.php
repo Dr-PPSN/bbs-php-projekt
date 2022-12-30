@@ -147,12 +147,12 @@ function buildSelect($tableData, $selectedValue) {
   return $selectHTML;
 }
 
-function getEditPopup($selectedTable, $columns, $rows) {
+function getEditPopup($tableName, $columns, $rows) {
   $editPopups = array();
   for ($i = 0; $i < count($rows); $i++) {
     $row = $rows[$i];
-    if (isset($row[$selectedTable . "_id"])) {
-      $id = $row[$selectedTable . "_id"];
+    if (isset($row[$tableName . "_id"])) {
+      $id = $row[$tableName . "_id"];
     } else {
       $id = $i;
     }
@@ -181,8 +181,19 @@ function getEditPopup($selectedTable, $columns, $rows) {
                 </div>
               </div>
               <div class="modal-footer">
-                <input type="hidden" name="table" value="' . $selectedTable . '">
-                <input type="hidden" name="id" value="' . $id . '">
+                <input type="hidden" name="table" value="' . $tableName . '">';
+
+    if (!isRefTable($tableName)) {
+      $HTML .= '<input type="hidden" name="id" value="' . $id . '">';
+    } else {
+      foreach($row as $key => $val) {
+        if (strpos($key, "_id") !== false) {
+          $HTML .= '<input type="hidden" name="oldValues[]" value="' . $val . '">';
+        }
+      }
+    }
+
+    $HTML .= '
                 <input type="submit" class="btn btn-success" name="btnEdit" id="editSubmit" value="OK">
               </div>
             </form>
@@ -198,7 +209,7 @@ function getEditPopup($selectedTable, $columns, $rows) {
 }
 
 
-function getInsertPopup($selectedTable, $columns) {
+function getInsertPopup($tableName, $columns) {
   $HTML = '
     <div class="modal fade" id="InsPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -222,7 +233,7 @@ function getInsertPopup($selectedTable, $columns) {
               </div>
             </div>
             <div class="modal-footer">
-              <input type="hidden" name="table" value="' . $selectedTable . '">
+              <input type="hidden" name="table" value="' . $tableName . '">
               <input type="submit" class="btn btn-success" name="btnIns" id="insSubmit" value="OK">
             </div>
           </form>
@@ -233,12 +244,12 @@ function getInsertPopup($selectedTable, $columns) {
   return $HTML;
 }
 
-function getDeletePopup($selectedTable, $rows) {
+function getDeletePopup($tableName, $rows) {
   $delPopups = array();
   for ($i = 0; $i < count($rows); $i++) {
     $row = $rows[$i];
-    if (isset($row[$selectedTable . "_id"])) {
-      $id = $row[$selectedTable . "_id"];
+    if (isset($row[$tableName . "_id"])) {
+      $id = $row[$tableName . "_id"];
     } else {
       $id = $i;
     }
@@ -256,7 +267,7 @@ function getDeletePopup($selectedTable, $rows) {
                 <span>Sind Sie sicher, dass Sie den Eintrag mit der ID ' . $id . ' löschen wollen?</span>
               </div>
               <div class="modal-footer">
-                <input type="hidden" name="table" value="' . $selectedTable . '">
+                <input type="hidden" name="table" value="' . $tableName . '">
                 <input type="hidden" name="id" value="' . $id . '">
                 <input type="submit" class="btn btn-success" name="btnDel" id="delSubmit" value="OK">
               </div>

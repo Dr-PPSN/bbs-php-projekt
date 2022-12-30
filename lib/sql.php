@@ -86,7 +86,20 @@ function updateTable(string $tableName, $id, array $values) {
 }
 
 function updateRefTable(string $tablename, array $oldValues, array $newValues) {
-  // TODO: Update RefTable
+  $SQL = 'UPDATE ' . $tablename . ' SET';
+  foreach ($newValues as $key => $value) {
+    $SQL .= ' ' . $key . ' = "' . $value . '",';
+  }
+  $SQL = substr($SQL, 0, -1);
+
+  $SQL .= ' WHERE ';
+  foreach ($oldValues as $key => $value) {
+    $SQL .= ' ' . $key . ' = "' . $value . '" AND';
+  }
+  $SQL = substr($SQL, 0, -3);
+
+  echo $SQL;
+  return executeSQL($SQL);
 }
 
 
@@ -102,8 +115,18 @@ function deleteRow($tableName, $id) {
   return executeSQL($SQL, [$id]);
 }
 
-function deleteRowRefTable(string $tablename, array $values) {
-  // TODO: delete RefTable
+function deleteRowRefTable(string $tableName, array $oldValues) {
+  $SQL = '
+  DELETE FROM
+    '. $tableName .'
+  WHERE ';
+  foreach ($oldValues as $key => $value) {
+    $SQL .= ' ' . $key . ' = "' . $value . '" AND';
+  }
+  $SQL = substr($SQL, 0, -3);
+
+  echo $SQL;
+  return executeSQL($SQL);
 }
 
 // ---------------------------- insert rows -------------------------------------
@@ -122,7 +145,18 @@ function addRow(string $tableName, array $values) {
 }
 
 function addRowRefTable(string $tablename, array $values) {
-  // TODO: add RefTable
+  $SQL = '
+  INSERT INTO
+    '. $tablename .'
+  SET
+  ';
+  foreach ($values as $key => $value) {
+    $SQL .= ' ' . $key . ' = "' . $value . '",';
+  }
+  $SQL = substr($SQL, 0, -1);
+
+  echo $SQL;
+  return executeSQL($SQL);
 }
 
 // ---------------------------- table helper function -------------------------------------
