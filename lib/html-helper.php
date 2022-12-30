@@ -36,10 +36,12 @@ function createHTMLTable($tableData, $showButtons){
       }
     }
     $thHTML .= '
-      <th>
-        <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#InsPopup">
-          Eintrag einfügen
-        </a>
+      <th colspan="2">
+        <div style="text-align: center;">
+          <a  class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#InsPopup">
+            Eintrag einfügen
+          </a>
+        </div>
       </th>';
     $thHTML .= '</tr>';
 
@@ -54,15 +56,19 @@ function createHTMLTable($tableData, $showButtons){
         $id = array_values($row)[0];
         $trHTML .= '
           <td>
-            <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#editPopup' . $id . '">
-              Edit
-            </a>
+            <div style="text-align: center;">
+              <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#editPopup' . $id . '">
+                Edit
+              </a>
+            </div>
           </td>';
         $trHTML .= '
           <td>
-            <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#delPopup' . $id . '">
-              Del
-            </a>
+            <div style="text-align: center;">
+              <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#delPopup' . $id . '">
+                Del
+              </a>
+            </div>
           </td>';
       }
       $trHTML .= '</tr>';
