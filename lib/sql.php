@@ -39,128 +39,6 @@ function executeSQL($SQL, $params = null) {
   }
 }
 
-// ---------------------------- get tables -------------------------------------
-
-function getBuecher($id = null) {
-  $SQL = '
-    SELECT
-      b.buecher_id        ID,
-      b.titel             Titel,
-      b.verkaufspreis     Verkaufspreis,
-      b.einkaufspreis     Einkaufspreis,
-      b.erscheinungsjahr  Erscheinungsjahr,
-      v.name              Verlag,
-      ba.Autoren          Autoren,
-      bl.Lieferanten      Lieferanten
-    FROM
-      buecher b
-    LEFT JOIN verlage v ON b.verlage_verlage_id = v.verlage_id
-    LEFT JOIN
-      (SELECT
-        ahb.buecher_buecher_id,
-        GROUP_CONCAT(
-          DISTINCT CONCAT(a.vorname, " ", a.nachname)
-          ORDER BY CONCAT(a.vorname, " ", a.nachname)
-          SEPARATOR "<br>") Autoren
-      FROM
-        autoren_has_buecher ahb
-      LEFT JOIN autoren a ON ahb.autoren_autoren_id = a.autoren_id
-      GROUP BY buecher_buecher_id
-      ) ba
-      ON b.buecher_id = ba.buecher_buecher_id
-    LEFT JOIN
-      (SELECT
-        bhl.buecher_buecher_id,
-        GROUP_CONCAT(
-          DISTINCT l.name
-          ORDER BY l.name
-          SEPARATOR "<br>") Lieferanten
-      FROM
-        buecher_has_lieferanten bhl
-      LEFT JOIN lieferanten l ON bhl.lieferanten_lieferanten_id = l.lieferanten_id
-      GROUP BY buecher_buecher_id) bl
-      ON b.buecher_id = bl.buecher_buecher_id
-    WHERE
-      (b.buecher_id = ? OR ? is NULL)
-    ORDER BY buecher_id
-  ';
-  return executeSQL($SQL, [$id, $id]);
-}
-
-function getVerlage($id = null) {
-  $SQL = '
-  SELECT 
-    v.verlage_id    ID,
-    v.name          Verlag,
-    o.postleitzahl  PLZ,
-    o.name          Sitz
-  FROM
-    verlage v
-  LEFT JOIN orte o ON v.orte_orte_id = o.orte_id
-  WHERE
-    (v.verlage_id = ? OR ? is NULL)
-  ';
-  return executeSQL($SQL, [$id, $id]);
-}
-
-function getLieferanten($id = null) {
-  $SQL = '
-  SELECT 
-    l.lieferanten_id  ID,
-    l.name            Lieferant,
-    o.postleitzahl    PLZ,
-    o.name            Sitz
-  FROM 
-    lieferanten l
-  LEFT JOIN orte o ON l.orte_orte_id = o.orte_id
-  WHERE
-    (l.lieferanten_id = ? OR ? is NULL)
-  ';
-  return executeSQL($SQL, [$id, $id]);
-}
-
-function getAutoren($id = null) {
-  $SQL = '
-  SELECT 
-    a.autoren_id    ID,
-    a.vorname       Vorname,
-    a.nachname      Nachname,
-    a.geburtsdatum  Geburtsdatum
-  FROM
-    autoren a
-  WHERE
-    (a.autoren_id = ? OR ? is NULL)
-  ';
-  return executeSQL($SQL, [$id, $id]);
-}
-
-function getSparten($id = null) {
-  $SQL = '
-  SELECT
-    s.sparten_id  ID,
-    s.bezeichnung Sparte
-  FROM
-    sparten s
-  WHERE
-    (s.sparten_id = ? OR ? is NULL)
-  ';
-  return executeSQL($SQL, [$id, $id]);
-}
-
-function getOrte($id = null) {
-  $SQL = '
-  SELECT
-    o.orte_id       ID,
-    o.postleitzahl  PLZ,
-    o.name          Sitz
-  FROM
-    orte o
-  WHERE
-    (o.orte_id = ? OR ? is null)
-  ';
-  return executeSQL($SQL, [$id, $id]);
-}
-
 
 // ---------------------------- all tables -------------------------------------
 
@@ -207,7 +85,7 @@ function updateTable(string $tableName, $id, array $values) {
   return executeSQL($SQL, [$id]);
 }
 
-function updateRefTable() {
+function updateRefTable(string $tablename, array $oldValues, array $newValues) {
   // TODO: Update RefTable
 }
 
@@ -224,6 +102,10 @@ function deleteRow($tableName, $id) {
   return executeSQL($SQL, [$id]);
 }
 
+function deleteRowRefTable(string $tablename, array $values) {
+  // TODO: delete RefTable
+}
+
 // ---------------------------- insert rows -------------------------------------
 
 function addRow(string $tableName, array $values) {
@@ -237,6 +119,22 @@ function addRow(string $tableName, array $values) {
   }
   $SQL = substr($SQL, 0, -1);
   return executeSQL($SQL);
+}
+
+function addRowRefTable(string $tablename, array $values) {
+  // TODO: add RefTable
+}
+
+// ---------------------------- table helper function -------------------------------------
+
+function isRefTable(string $tableName) {
+  $columns = getColumnTypes($tableName);
+  foreach ($columns as $column) {
+    if ($column['COLUMN_NAME'] == $tableName . '_id') {
+      return false;
+    }
+  }
+  return true;
 }
 
 ?>
