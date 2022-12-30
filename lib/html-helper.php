@@ -37,7 +37,18 @@ function createHTMLTable($tableData, $showButtons, $link){
         }
       }
       else {
-        $thHTML .= '<th scope="col" class= "neonTableHeader">' . $colName . '</th>';
+        //wenn der cookie orderBy gesetzt ist, soll der Pfeil (ASC oder DESC) angezeigt werden
+        if (isset($_COOKIE['orderBy']) && $colName == $_COOKIE['orderBy']) {
+          if ($_COOKIE['orderDirection'] == "ASC") {
+            $thHTML .= '<th scope="col"><button class="btn neonTableHeader tableHead" id="' . $colName . '">' . $colName . ' ▲</button></th>';
+          }
+          else if ($_COOKIE['orderDirection'] == "DESC") {
+            $thHTML .= '<th scope="col"><button class="btn neonTableHeader tableHead" id="' . $colName . '">' . $colName . ' ▼</button></th>';
+          }
+        }
+        else {
+          $thHTML .= '<th scope="col"><button class="btn neonTableHeader tableHead" id="' . $colName . '">' . $colName . '</button></th>';
+        }
       }
     }
     $thHTML .= '</tr>';

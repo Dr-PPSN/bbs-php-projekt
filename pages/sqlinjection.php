@@ -14,6 +14,12 @@ if (isset($_POST['btnSQLInjection'])) {
   $sql = $_POST['sql-injection-text'];
   $inputHTML = '<textarea class="form-control" rows="10" id="sql-injection-text" name="sql-injection-text" placeholder="SQL">' . $sql . '</textarea>';
   $result = executeSQL($sql);
+  //wenn das sql kein orderBy hat, dann soll der Cookie gelöscht werden
+  if (strpos($sql, 'order by') === false) {
+    echo "Cookie wird gelöscht";
+    unset($_COOKIE['orderBy']);
+    setcookie('orderBy', '', time() - 3600, '/'); // empty value and old timestamp
+  }
 }
 if (isset($_GET['orderBy'])) {
   $orderBy = $_GET['orderBy'];
@@ -64,7 +70,7 @@ $_SESSION['orderDirection'] = $orderDirection;
       </div>
       <br><br>
       <!-- SQL Input und senden BTN -->
-      <div class="row bg-dark mt-5">
+      <div class="row bg-dark my-5">
         <div class="col-md-1 align-items-center justify-content-center"></div>
         <div class="col-md-10 align-items-center justify-content-center" id="tableElement">
           <form action="" method="post">
@@ -105,6 +111,46 @@ $_SESSION['orderDirection'] = $orderDirection;
     <script>
       $("#ueberschrift").click(function(){
         window.location.href = "../index.php";
+      });
+      $(".tableHead").click(function(){
+        var id = $(this).attr("id");
+        //speicher in den cookies die spalte nach der sortiert werden soll
+        document.cookie = "orderBy=" + id;
+        //speicher in den cookies die richtung nach der sortiert werden soll
+        if (document.cookie.includes("orderDirection=ASC")) {
+          document.cookie = "orderDirection=DESC";
+        } else {
+          document.cookie = "orderDirection=ASC";
+        }
+
+        //wenn im textfeld sql-injection-text "order by " steht, dann lösche es
+        if ($("#sql-injection-text").val().includes("order by ")) {
+          $("#sql-injection-text").val($("#sql-injection-text").val().substring(0, $("#sql-injection-text").val().indexOf("order by")));
+        }
+        // entferne alle doppelten leerzeichen
+        $("#sql-injection-text").val($("#sql-injection-text").val().replace(/\s+/g, ' '));
+
+        // füge dem textfeld sql-injection-text "order by " hinzu
+        $("#sql-injection-text").val($("#sql-injection-text").val()+" order by " + id);
+        // wenn die richtung nach der sortiert werden soll DESC ist, dann füge dem textfeld sql-injection-text " DESC" hinzu
+        if (document.cookie.includes("orderDirection=DESC")) {
+          $("#sql-injection-text").val($("#sql-injection-text").val()+" DESC");
+          // entferne ▼ und füge ▲ hinzu
+          $(this).text($(this).text().substring(0, $(this).text().length - 1));
+          $(this).text($(this).text()+ "▼");
+        }
+        else {
+          $("#sql-injection-text").val($("#sql-injection-text").val()+" ASC");
+          // entferne ▲ und füge ▼ hinzu
+          $(this).text($(this).text().substring(0, $(this).text().length - 1));
+          $(this).text($(this).text()+ "▲");
+        }
+        //entferne ▲ und ▼ von allen anderen spalten aber nur, wenn sie ▲ oder ▼ haben
+        $(".tableHead").not(this).each(function() {
+          if ($(this).text().includes("▲") || $(this).text().includes("▼")) {
+            $(this).text($(this).text().substring(0, $(this).text().length - 1));
+          }
+        });
       });
     </script>
     <?php if (isset($notification)) echo '<script>displayMessage("' . $notification . '");</script>' ?>

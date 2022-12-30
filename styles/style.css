@@ -13,7 +13,7 @@
 .neonTableHeader{
     color: white;
     font-family: neonTableHeader;
-
+    cursor: pointer;
     text-shadow:
     0 0 7px #ef1de7,
     0 0 10px #ef1de7,

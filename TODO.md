@@ -26,4 +26,4 @@ TODO
 
 - Label mit Attributnamen (Kai) ✓
 - SQL-Injection-Feld als mehrzeiliges Textfeld (Kai) ✓
-- Edit: select bei Custom SQL (Kai) 
+- Edit: select bei Custom SQL (Kai) ✓
