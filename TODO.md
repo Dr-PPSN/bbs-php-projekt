@@ -1,6 +1,6 @@
 TODO
 
-- Add: Add, Edit & Del Buttons (Robert)
+- Add: Add, Edit & Del Buttons (Robert) ✓
 - edit für Referenztabellen (Robert)
 
 - Homepage überarbeiten (Kai) ✓
