@@ -16,7 +16,6 @@ if (isset($_POST['btnSQLInjection'])) {
   $result = executeSQL($sql);
   //wenn das sql kein orderBy hat, dann soll der Cookie gelöscht werden
   if (strpos($sql, 'order by') === false) {
-    echo "Cookie wird gelöscht";
     unset($_COOKIE['orderBy']);
     setcookie('orderBy', '', time() - 3600, '/'); // empty value and old timestamp
   }
@@ -51,8 +50,8 @@ $_SESSION['orderDirection'] = $orderDirection;
     <link rel="stylesheet" type="text/css" href="../styles/message.css">
     <link rel="stylesheet" type="text/css" href="../styles/style.css">
   </head>
-  <body>
-    <div class="container-fluid h-100 bg-dark pb-5">
+  <body class="bg-dark">
+    <div class="container-fluid bg-dark pb-5">
       <div class="row bg-dark">
         <div class="col-sm-3 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
           <form action="../index.php">

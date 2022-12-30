@@ -30,8 +30,8 @@ function checkPHPVersion() {
     <link rel="stylesheet" type="text/css" href="./styles/style.css">
     <link rel="stylesheet" type="text/css" href="./styles/neonBTN.css">
   </head>
-  <body>
-    <div class="container-fluid vh-100 bg-dark mb-3">
+  <body class="bg-dark">
+    <div class="container-fluid bg-dark mb-3">
       <!-- Menue -->
       <div class="row bg-dark">
         <div class="col-sm-3 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
