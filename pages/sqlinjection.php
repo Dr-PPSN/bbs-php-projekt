@@ -8,8 +8,9 @@ require '../lib/html-helper.php';
 $orderBy = "null"; // Spalte nach der sortiert werden soll
 $orderDirection = "ASC"; // Sortierrichtung (ASC oder DESC)
 $tableHTML = '';
+$sql = '';
 $inputHTML = '<textarea class="form-control" rows="10" id="sql-injection-text" name="sql-injection-text" placeholder="SQL"></textarea>';
-if (isset($_POST['btnSQLInjection']) || true) {
+if (isset($_POST['btnSQLInjection'])) {
   $sql = $_POST['sql-injection-text'];
   $inputHTML = '<textarea class="form-control" rows="10" id="sql-injection-text" name="sql-injection-text" placeholder="SQL">' . $sql . '</textarea>';
   $result = executeSQL($sql);
@@ -45,7 +46,7 @@ $_SESSION['orderDirection'] = $orderDirection;
     <link rel="stylesheet" type="text/css" href="../styles/style.css">
   </head>
   <body>
-    <div class="container-fluid h-100 bg-dark">
+    <div class="container-fluid h-100 bg-dark pb-5">
       <div class="row bg-dark">
         <div class="col-sm-3 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
           <form action="../index.php">
@@ -78,8 +79,10 @@ $_SESSION['orderDirection'] = $orderDirection;
       <!-- /SQL Input und senden BTN -->
       <!-- SQL Result, wenn Select abfrage erfolgreich war -->
       <?php
-        echo 'hier';
-        
+        // wenn $sql eine Select Abfrage ist
+        if (stripos($sql, "SELECT") === 0) {
+          echo buildHtmlTable($result, false, $orderBy, $orderDirection, false);
+        }
       ?>
       <!-- /SQL Result, wenn Select abfrage erfolgreich war -->
       <!-- footer -->

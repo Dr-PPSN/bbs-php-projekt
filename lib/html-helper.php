@@ -2,37 +2,42 @@
 
 // Hilfsfunktionen für HTML-Rendering
 
-function buildHtmlTable($tableData, $showButtons, $orderBy, $orderDirection) {
+function buildHtmlTable($tableData, $showButtons, $orderBy, $orderDirection, $link) {
   // Erstelle eine normale HTML-Tabelle, ohne geordnet zu sein
   if ($orderBy == "null") {
-    return createHTMLTable($tableData, $showButtons);
+    return createHTMLTable($tableData, $showButtons, $link);
   }
   // Erstelle eine HTML-Tabelle, die geordnet ist
   else {
     $tableData = orderTableData($tableData, $orderBy, $orderDirection);
-    return createHTMLTable($tableData, $showButtons);
+    return createHTMLTable($tableData, $showButtons, $link);
   }
 }
 
-function createHTMLTable($tableData, $showButtons){
+function createHTMLTable($tableData, $showButtons, $link){
   if (isset($tableData)) {
     $colNames = array_keys($tableData[0]);
     $thHTML = '<tr>';
     foreach ($colNames as $colName) {
       // wenn die schleife bei der orderBy spalte ist, soll der Pfeil (ASC oder DESC) angezeigt werden
-      if (isset($_GET['orderBy']) && $colName == $_GET['orderBy']) {
-        if ($_SESSION['orderDirection'] == "ASC") {
-          // jede Überschrift ist ein Klick-Link, der die Tabelle neu sortiert durch die neuen GET-Parameter
-          $thHTML .= '<th scope="col"><a href="table.php?table=' . $_GET['table'] . '&orderBy=' . $colName . '&orderDirection=' . ascORdesc("ASC") . '" class= "neonTableHeader">' . $colName . ' ' . drawArrow() . '</a></th>';
+      if ($link) {
+        if (isset($_GET['orderBy']) && $colName == $_GET['orderBy']) {
+          if ($_SESSION['orderDirection'] == "ASC") {
+            // jede Überschrift ist ein Klick-Link, der die Tabelle neu sortiert durch die neuen GET-Parameter
+            $thHTML .= '<th scope="col"><a href="table.php?table=' . $_GET['table'] . '&orderBy=' . $colName . '&orderDirection=' . ascORdesc("ASC") . '" class= "neonTableHeader">' . $colName . ' ' . drawArrow() . '</a></th>';
+          }
+          else if ($_SESSION['orderDirection'] == "DESC") {
+            // jede Überschrift ist ein Klick-Link, der die Tabelle neu sortiert durch die neuen GET-Parameter
+            $thHTML .= '<th scope="col"><a href="table.php?table=' . $_GET['table'] . '&orderBy=' . $colName . '&orderDirection=' . ascORdesc("DESC") . '" class= "neonTableHeader">' . $colName . ' ' . drawArrow() . '</a></th>';
+          }
         }
-        else if ($_SESSION['orderDirection'] == "DESC") {
+        else {
           // jede Überschrift ist ein Klick-Link, der die Tabelle neu sortiert durch die neuen GET-Parameter
-          $thHTML .= '<th scope="col"><a href="table.php?table=' . $_GET['table'] . '&orderBy=' . $colName . '&orderDirection=' . ascORdesc("DESC") . '" class= "neonTableHeader">' . $colName . ' ' . drawArrow() . '</a></th>';
+          $thHTML .= '<th scope="col"><a href="table.php?table=' . $_GET['table'] . '&orderBy=' . $colName . '&orderDirection=' . ascORdesc("DESC") . '" class= "neonTableHeader">' . $colName . '</a></th>';
         }
       }
       else {
-        // jede Überschrift ist ein Klick-Link, der die Tabelle neu sortiert durch die neuen GET-Parameter
-        $thHTML .= '<th scope="col"><a href="table.php?table=' . $_GET['table'] . '&orderBy=' . $colName . '&orderDirection=' . ascORdesc("DESC") . '" class= "neonTableHeader">' . $colName . '</a></th>';
+        $thHTML .= '<th scope="col" class= "neonTableHeader">' . $colName . '</th>';
       }
     }
     $thHTML .= '</tr>';
