@@ -65,20 +65,7 @@ function createHTMLTable($tableData, $showButtons){
     return $tableHTML;
   }
 }
-// function orderTableData($tableData, $orderBy, $orderDirection){
-//   // Ein Algorithmus, der die Daten nach $orderBy und $orderDirection sortiert und dann die createHTMLTable-Funktion aufruft
-    
-//     if ($orderDirection == "ASC") {
-//       array_multisort(array_column($tableData, $orderBy), SORT_ASC, $tableData);
-//     }
-//     else if ($orderDirection == "DESC") {
-//       array_multisort(array_column($tableData, $orderBy), SORT_DESC, $tableData);
-//     }
-//     return $tableData;
-// }
-// /\
-// ||   Man könnte auch die Funktion array_multisort() verwenden, um die Daten zu sortieren...aber dürfen wir ja nicht 
-// ||
+
 function orderTableData($tableData, $orderBy, $orderDirection) {
   $n = count($tableData);
   for ($i = 0; $i < $n - 1; $i++) {
@@ -163,16 +150,15 @@ function getEditPopup($selectedTable, $columns, $rows) {
               <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
             </div>
             <form action="" method="post">
-              <div class="modal-body">
-                <div class="form-group">';
+              <div class="modal-body">';
     }
 
     for ($j = 1; $j < count($row); $j++) {
       $key  = array_keys($row)[$j];
       $val  = array_values($row)[$j];
       $type = getColumnType($columns, $key);
-      $HTML .= '<span>' . $key . '</span>';
-      $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="edit-' . $key . '" name="edit[' . $key . ']" value="' . $val . '">';
+      $HTML .= '<div class="form-group row"><div class="col-sm-4 d-flex justify-content-center align-items-center">' . $key . ':</div>';
+      $HTML .= '<div class="col-sm-8 d-flex justify-content-center align-items-center"><input type="' . $type . '" class="form-control mt-2 w-75" id="edit-' . $key . '" name="edit[' . $key . ']" value="' . $val . '"></div></div>';
     }
     $HTML .= '
               </div>

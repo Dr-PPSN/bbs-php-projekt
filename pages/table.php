@@ -74,7 +74,7 @@ $insertPopupsHTML  = getInsertPopup($selectedTable, $columnTypes, $rows);
           <div class="d-flex align-items-center justify-content-center text-center">PHP Projekt Buchladen</div>
         </div>
         <div class="col-sm-3 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
-          <form action="pages/sqlinjection.php" method="post">
+          <form action="sqlinjection.php" method="post">
             <button type="submit" name="sqlinjection" class="btn neon-button" id="btnSQLInjection">SQL Injection</button>
           </form>
         </div>

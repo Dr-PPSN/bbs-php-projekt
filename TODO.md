@@ -24,6 +24,6 @@ TODO
 - Cursor anpassen (Kai) ✓
 - SQL-Injection Button auf allen Seiten (Kai) ✓
 
-- Label mit Attributnamen (Kai)
-- SQL-Injection-Feld als mehrzeiliges Textfeld (Kai)
-- Edit: select bei Custom SQL (Kai)
+- Label mit Attributnamen (Kai) ✓
+- SQL-Injection-Feld als mehrzeiliges Textfeld (Kai) ✓
+- Edit: select bei Custom SQL (Kai) 
