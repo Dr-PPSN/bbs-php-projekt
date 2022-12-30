@@ -6,7 +6,6 @@ require 'lib/html-helper.php';
 checkPHPVersion();
 
 if (isset($_POST['btnReset'])) {
-  require './lib/DB.php';
   resetDB();
 }
 
