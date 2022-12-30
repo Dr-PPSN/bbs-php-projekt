@@ -6,10 +6,17 @@ require '../lib/sql.php';
 require '../lib/html-helper.php';
 
 if (isset($_POST['btnEdit'])) {
-  $id = $_POST['id'];
-  $table = $_POST['table'];
+  // TODO: Tabellen unterscheiden
+  $table  = $_POST['table'];
+  $id     = $_POST['id'];
   $values = $_POST['edit'];
   updateTable($table, $id, $values);
+}
+
+if (isset($_POST['btnDel'])) {
+  $table = $_POST['table'];
+  $id    = $_POST['id'];
+  deleteRow($table, $id);
 }
 
 $orderBy = "null"; // Spalte nach der sortiert werden soll
@@ -47,7 +54,8 @@ $columnTypes  = getColumnTypes($selectedTable);
 $selHTML   = buildSelect($allTables, $selectedTable);
 $tableHTML = buildHtmlTable($rows, true, $orderBy, $orderDirection);
 $editPopupsHTML    = getEditPopup($selectedTable, $columnTypes, $rows);
-$insertPopupsHTML  = getInsertPopup($selectedTable, $columnTypes, $rows);
+$insertPopupsHTML  = getInsertPopup($selectedTable, $columnTypes);
+$deletePopupsHTML  = getDeletePopup($selectedTable, $rows);
 
 
 ?>

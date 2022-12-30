@@ -35,6 +35,12 @@ function createHTMLTable($tableData, $showButtons){
         $thHTML .= '<th scope="col"><a href="table.php?table=' . $_GET['table'] . '&orderBy=' . $colName . '&orderDirection=' . ascORdesc("DESC") . '" class= "neonTableHeader">' . $colName . '</a></th>';
       }
     }
+    $thHTML .= '
+      <th>
+        <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#insPopup">
+          Eintrag einfügen
+        </a>
+      </th>';
     $thHTML .= '</tr>';
 
     $trHTML = '';
@@ -194,14 +200,76 @@ function getEditPopup($selectedTable, $columns, $rows) {
 }
 
 
-function getInsertPopup($selectedTable, $columns, $rows) {
-  // TODO: design popup
-  return "Insert Popup";
+function getInsertPopup($selectedTable, $columns) {
+  $HTML = '
+    <div class="modal fade" id="InsPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag anlegen</h5>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+          </div>
+          <form action="" method="post">
+            <div class="modal-body">
+              <div class="form-group">';
+
+  for ($i = 1; $i < count($columns); $i++) {
+    $key  = $columns[$i]['COLUMN_NAME'];
+    $type = $columns[$i]['DATA_TYPE'];
+    $HTML .= '<span>' . $key . '</span>';
+    $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="ins-' . $key . '" name="ins[' . $key . ']">';
+  }
+  
+  $HTML .= '
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="table" value="' . $selectedTable . '">
+              <input type="submit" class="btn btn-success" name="btnIns" id="insSubmit" value="OK">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>';
+
+  return $HTML;
 }
 
-function getDelPopup($selectedTable, $rows) {
-  // TODO: design popup
-  return "Del Popup";
+function getDeletePopup($selectedTable, $rows) {
+  $delPopups = array();
+  for ($i = 0; $i < count($rows); $i++) {
+    $row = $rows[$i];
+    if (isset($row[$selectedTable . "_id"])) {
+      $id = $row[$selectedTable . "_id"];
+    } else {
+      $id = $i;
+    }
+    $HTML = '
+    <div class="modal fade" id="delPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag löschen</h5>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+          </div>
+          <form action="" method="post">
+            <div class="modal-body">
+              <span>Sind Sie sicher, dass Sie den Eintrag mit der ID ' . $id . ' löschen wollen?</span>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="table" value="' . $selectedTable . '">
+              <input type="hidden" name="id" value="' . $id . '">
+              <input type="submit" class="btn btn-success" name="btnDel" id="delSubmit" value="OK">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>';
+    $delPopups[] = $HTML;
+  }
+  
+  $HTML = implode("", $delPopups);
+  return $HTML;
 }
 
 function getColumnType($columnTypeList, $columnName) {

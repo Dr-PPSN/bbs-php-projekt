@@ -214,7 +214,7 @@ function updateRefTable() {
 
 // ---------------------------- delete tables -------------------------------------
 
-function deleteFromTable($tableName, $id) {
+function deleteRow($tableName, $id) {
   $SQL = '
   DELETE FROM
     '. $tableName .'
