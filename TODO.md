@@ -2,6 +2,7 @@ TODO
 
 - Add: Add, Edit & Del Buttons (Robert) ✓
 - edit für Referenztabellen (Robert)
+- Tabelle leer funktioniert nicht (Robert)
 
 - Homepage überarbeiten (Kai) ✓
   - Hintergrundfarbe ✓
@@ -32,3 +33,7 @@ TODO
   - Hintergrund komplett grau bei Tabelle
   - table header verschwindet beim Sortieren
   - echo "Cookie wurde gesetzt" entfernen
+
+- wenn Tabelle leer, dann funktioniert die Landing Page nicht mehr (Kai)
+  - siehe Count() in index
+  - besser: Funktionsrückgabe vorher in Variable schreiben, dann echo Variable im HTML
