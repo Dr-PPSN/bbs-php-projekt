@@ -29,6 +29,6 @@ TODO
 - Edit: select bei Custom SQL (Kai) ✓
 
 - SQL Injection Styles (Kai)
-  - Hintergrund komplett grau bei Tabelle
+  - Hintergrund komplett grau bei Tabelle ✓
   - table header verschwindet beim Sortieren
-  - echo "Cookie wurde gesetzt" entfernen
+  - echo "Cookie wurde gesetzt" entfernen ✓
