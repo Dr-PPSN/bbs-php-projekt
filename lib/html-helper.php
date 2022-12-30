@@ -153,20 +153,11 @@ function getEditPopup($selectedTable, $columns, $rows) {
     $row = $rows[$i];
     if (isset($row[$selectedTable . "_id"])) {
       $id = $row[$selectedTable . "_id"];
-      $HTML = '
-      <div class="modal fade" id="editPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag bearbeiten (ID=' . $id . ')</h5>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
-            </div>
-            <form action="" method="post">
-              <div class="modal-body">
-                <div class="form-group">';
     } else {
       $id = $i;
-      $HTML = '
+    }
+
+    $HTML = '
       <div class="modal fade" id="editPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -177,7 +168,6 @@ function getEditPopup($selectedTable, $columns, $rows) {
             <form action="" method="post">
               <div class="modal-body">
                 <div class="form-group">';
-    }
 
     for ($j = 1; $j < count($row); $j++) {
       $key  = array_keys($row)[$j];
@@ -186,18 +176,20 @@ function getEditPopup($selectedTable, $columns, $rows) {
       $HTML .= '<span>' . $key . '</span>';
       $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="edit-' . $key . '" name="edit[' . $key . ']" value="' . $val . '">';
     }
+
     $HTML .= '
+                </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <input type="hidden" name="table" value="' . $selectedTable . '">
-              <input type="hidden" name="id" value="' . $id . '">
-              <input type="submit" class="btn btn-success" name="btnEdit" id="editSubmit" value="OK">
-            </div>
-          </form>
+              <div class="modal-footer">
+                <input type="hidden" name="table" value="' . $selectedTable . '">
+                <input type="hidden" name="id" value="' . $id . '">
+                <input type="submit" class="btn btn-success" name="btnEdit" id="editSubmit" value="OK">
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </div>';
+      </div>';
+
     $editPopups[] = $HTML;
   }
 
@@ -250,27 +242,28 @@ function getDeletePopup($selectedTable, $rows) {
     } else {
       $id = $i;
     }
+
     $HTML = '
-    <div class="modal fade" id="delPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag löschen</h5>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+      <div class="modal fade" id="delPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Eintrag löschen</h5>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+            </div>
+            <form action="" method="post">
+              <div class="modal-body">
+                <span>Sind Sie sicher, dass Sie den Eintrag mit der ID ' . $id . ' löschen wollen?</span>
+              </div>
+              <div class="modal-footer">
+                <input type="hidden" name="table" value="' . $selectedTable . '">
+                <input type="hidden" name="id" value="' . $id . '">
+                <input type="submit" class="btn btn-success" name="btnDel" id="delSubmit" value="OK">
+              </div>
+            </form>
           </div>
-          <form action="" method="post">
-            <div class="modal-body">
-              <span>Sind Sie sicher, dass Sie den Eintrag mit der ID ' . $id . ' löschen wollen?</span>
-            </div>
-            <div class="modal-footer">
-              <input type="hidden" name="table" value="' . $selectedTable . '">
-              <input type="hidden" name="id" value="' . $id . '">
-              <input type="submit" class="btn btn-success" name="btnDel" id="delSubmit" value="OK">
-            </div>
-          </form>
         </div>
-      </div>
-    </div>';
+      </div>';
     $delPopups[] = $HTML;
   }
   
