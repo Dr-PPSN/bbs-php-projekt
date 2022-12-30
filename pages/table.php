@@ -19,6 +19,12 @@ if (isset($_POST['btnDel'])) {
   deleteRow($table, $id);
 }
 
+if (isset($_POST['btnIns'])) {
+  $table  = $_POST['table'];
+  $values = $_POST['ins'];
+  addRow($table, $values);
+}
+
 $orderBy = "null"; // Spalte nach der sortiert werden soll
 $orderDirection = "ASC"; // Sortierrichtung (ASC oder DESC)
 $tableHTML = '';

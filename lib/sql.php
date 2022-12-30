@@ -195,7 +195,7 @@ function getColumnTypes($tableName) {
 }
 
 
-// ---------------------------- update tables -------------------------------------
+// ---------------------------- update rows -------------------------------------
 
 function updateTable(string $tableName, $id, array $values) {
   $SQL = 'UPDATE ' . $tableName . ' SET';
@@ -212,7 +212,7 @@ function updateRefTable() {
 }
 
 
-// ---------------------------- delete tables -------------------------------------
+// ---------------------------- delete rows -------------------------------------
 
 function deleteRow($tableName, $id) {
   $SQL = '
@@ -222,6 +222,21 @@ function deleteRow($tableName, $id) {
     '. $tableName .'_id = ?
   ';
   return executeSQL($SQL, [$id]);
+}
+
+// ---------------------------- insert rows -------------------------------------
+
+function addRow(string $tableName, array $values) {
+  $SQL = '
+  INSERT INTO
+    '. $tableName .'
+  SET
+  ';
+  foreach ($values as $key => $value) {
+    $SQL .= ' ' . $key . ' = "' . $value . '",';
+  }
+  $SQL = substr($SQL, 0, -1);
+  return executeSQL($SQL);
 }
 
 ?>
