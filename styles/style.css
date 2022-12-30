@@ -13,7 +13,7 @@
 .neonTableHeader{
     color: white;
     font-family: neonTableHeader;
-
+    cursor: pointer;
     text-shadow:
     0 0 7px #ef1de7,
     0 0 10px #ef1de7,
@@ -116,6 +116,14 @@
   .blueBorder:hover {
     background-color: rgba(0, 217, 255, 0.235) !important;
     cursor: pointer;
+  }
+
+  textarea {
+    border: 2px solid var(--clr-blueBorder);
+    box-shadow: inset 0 0 0.5em 0 var(--clr-blueBorder), 0 0 0.5em 0 var(--clr-blueBorder);
+    background: transparent !important;
+    color: white !important;
+    font-size: 1.2em !important;
   }
   
  .neon-button {
