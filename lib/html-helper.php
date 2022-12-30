@@ -37,7 +37,7 @@ function createHTMLTable($tableData, $showButtons){
     }
     $thHTML .= '
       <th>
-        <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#insPopup">
+        <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#InsPopup">
           Eintrag einfügen
         </a>
       </th>';
