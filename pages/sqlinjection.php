@@ -86,7 +86,7 @@ $_SESSION['orderDirection'] = $orderDirection;
       <?php
         // wenn $sql eine Select Abfrage ist
         if (stripos($sql, "SELECT") === 0) {
-          echo buildHtmlTable($result, false, $orderBy, $orderDirection, false);
+          echo buildHtmlTable($result, false, false);
         }
       ?>
       <!-- /SQL Result, wenn Select abfrage erfolgreich war -->
