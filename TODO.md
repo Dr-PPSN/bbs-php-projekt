@@ -31,7 +31,7 @@ TODO
 
 - SQL Injection Styles (Kai)
   - Hintergrund komplett grau bei Tabelle ✓
-  - table header verschwindet beim Sortieren
+  - table header verschwindet beim Sortieren ✓
   - echo "Cookie wurde gesetzt" entfernen ✓
 
 - wenn Tabelle leer, dann funktioniert die Landing Page nicht mehr (Kai) ✓

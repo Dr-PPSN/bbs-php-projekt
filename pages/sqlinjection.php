@@ -151,6 +151,7 @@ $_SESSION['orderDirection'] = $orderDirection;
             $(this).text($(this).text().substring(0, $(this).text().length - 1));
           }
         });
+        $("#sql-injection-senden").click();
       });
     </script>
     <?php if (isset($notification)) echo '<script>displayMessage("' . $notification . '");</script>' ?>

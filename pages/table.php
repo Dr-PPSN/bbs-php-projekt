@@ -111,7 +111,7 @@ $deletePopupHTML  = getDeletePopup($selectedTable, $rows);
         </div>
       </div>
       <form action="table.php" method="get" class="row bg-dark">
-        <div class="col-md-12 d-flex align-items-center justify-content-center">
+        <div class="col-md-12 d-flex align-items-center justify-content-center my-4">
           <?php echo $selHTML ?>
         </div>
       </form>
