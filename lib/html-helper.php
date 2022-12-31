@@ -192,7 +192,7 @@ function getEditPopup($tableName, $columns, $rows) {
     }
 
     $HTML .= '
-                <input type="submit" class="btn btn-success" name="btnEdit" id="editSubmit" value="OK">
+                <input type="submit" class="btn btn-success ml-1" name="btnEdit" id="editSubmit" value="OK">
               </div>
             </form>
           </div>
@@ -235,7 +235,7 @@ function getInsertPopup($tableName, $columns) {
             </div>
             <div class="modal-footer">
               <input type="hidden" name="table" value="' . $tableName . '">
-              <input type="submit" class="btn btn-success" name="btnIns" id="insSubmit" value="OK">
+              <input type="submit" class="btn btn-success ml-1" name="btnIns" id="insSubmit" value="OK">
             </div>
           </form>
         </div>
@@ -277,7 +277,7 @@ function getDeletePopup($tableName, $rows) {
 
     $HTML .= '
                 <input type="hidden" name="table" value="' . $tableName . '">
-                <input type="submit" class="btn btn-success" name="btnDel" id="delSubmit" value="OK">
+                <input type="submit" class="btn btn-success ml-1" name="btnDel" id="delSubmit" value="OK">
               </div>
             </form>
           </div>
