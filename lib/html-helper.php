@@ -43,7 +43,8 @@ function createHTMLTable($tableData, $showButtons, $thIsLink){
         }
       }
     }
-    $thHTML .= '
+    if ($thIsLink) {
+      $thHTML .= '
       <th colspan="2">
         <div style="text-align: center;">
           <a  class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#InsPopup">
@@ -51,6 +52,8 @@ function createHTMLTable($tableData, $showButtons, $thIsLink){
           </a>
         </div>
       </th>';
+    }
+
     $thHTML .= '</tr>';
 
     $trHTML = '';
