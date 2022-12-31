@@ -220,7 +220,10 @@ function getInsertPopup($tableName, $columns) {
             <div class="modal-body">
               <div class="form-group">';
 
-  for ($i = 1; $i < count($columns); $i++) {
+  for ($i = 0; $i < count($columns); $i++) {
+    if ($columns[$i]['COLUMN_NAME'] == ($tableName . "_id")) {
+      continue;
+    }
     $key  = $columns[$i]['COLUMN_NAME'];
     $type = $columns[$i]['DATA_TYPE'];
     $HTML .= '<span>' . $key . '</span>';
