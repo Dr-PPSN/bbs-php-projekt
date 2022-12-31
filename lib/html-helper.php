@@ -145,11 +145,12 @@ function buildSelect($tableData, $selectedValue) {
   $selectHTML = '<select name="table" class="form-control bg-dark neonTableHeader blueBorderWithoutHover" onchange="this.form.submit()">';
   for ($i = 0; $i < count($tableData); $i++) {
     $value = array_values($tableData[$i])[0];
-    $selectHTML .= '<option value="' . $value . '"';
     if ($selectedValue == $value) {
-      $selectHTML .= ' selected';
+      $selectHTML .= '<option value="' . $value . '" selected>' . $value . '</option>';
     }
-    $selectHTML .= 'class="text-white">' . $value . '</option>';
+    else {
+      $selectHTML .= '<option class="text-white" value="' . $value . '">' . $value . '</option>';
+    }
   }
   $selectHTML .= '</select>';
   return $selectHTML;
