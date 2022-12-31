@@ -63,13 +63,13 @@ if (isset($_GET['table']) && !empty($_GET['table'])) {
 } else {
   $selectedTable = array_values($allTables[0])[0];
 }
-$rows         = getTable($selectedTable);
-$columnTypes  = getColumnTypes($selectedTable);
+$rows        = orderTableData(getTable($selectedTable), $orderBy, $orderDirection);
+$columnTypes = getColumnTypes($selectedTable);
 $selHTML   = buildSelect($allTables, $selectedTable);
-$tableHTML = buildHtmlTable($rows, true, $orderBy, $orderDirection, true);
-$editPopupsHTML    = getEditPopup($selectedTable, $columnTypes, $rows);
-$insertPopupsHTML  = getInsertPopup($selectedTable, $columnTypes);
-$deletePopupHTML   = getDeletePopup($selectedTable, $rows);
+$tableHTML = buildHtmlTable($rows, true, true);
+$editPopupsHTML   = getEditPopup($selectedTable, $columnTypes, $rows);
+$insertPopupsHTML = getInsertPopup($selectedTable, $columnTypes);
+$deletePopupHTML  = getDeletePopup($selectedTable, $rows);
 
 
 ?>

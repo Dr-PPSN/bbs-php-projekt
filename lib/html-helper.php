@@ -2,25 +2,17 @@
 
 // Hilfsfunktionen für HTML-Rendering
 
-function buildHtmlTable($tableData, $showButtons, $orderBy, $orderDirection, $link) {
-  // Erstelle eine normale HTML-Tabelle, ohne geordnet zu sein
-  if ($orderBy == "null") {
-    return createHTMLTable($tableData, $showButtons, $link);
-  }
-  // Erstelle eine HTML-Tabelle, die geordnet ist
-  else {
-    $tableData = orderTableData($tableData, $orderBy, $orderDirection);
-    return createHTMLTable($tableData, $showButtons, $link);
-  }
+function buildHtmlTable($tableData, $showButtons, $link) {
+  return createHTMLTable($tableData, $showButtons, $link);
 }
 
-function createHTMLTable($tableData, $showButtons, $link){
+function createHTMLTable($tableData, $showButtons, $thIsLink){
   if (isset($tableData)) {
     $colNames = array_keys($tableData[0]);
     $thHTML = '<tr>';
     foreach ($colNames as $colName) {
       // wenn die schleife bei der orderBy spalte ist, soll der Pfeil (ASC oder DESC) angezeigt werden
-      if ($link) {
+      if ($thIsLink) {
         if (isset($_GET['orderBy']) && $colName == $_GET['orderBy']) {
           if ($_SESSION['orderDirection'] == "ASC") {
             // jede Überschrift ist ein Klick-Link, der die Tabelle neu sortiert durch die neuen GET-Parameter
@@ -64,16 +56,15 @@ function createHTMLTable($tableData, $showButtons, $link){
     $trHTML = '';
     for ($i = 0; $i < count($tableData); $i++) {
       $row = $tableData[$i];
-      $trHTML .= '<tr class= "neonTableHeaderGreen">';
+      $trHTML .= '<tr class="neonTableHeaderGreen">';
       foreach ($row as $val) {
         $trHTML .= '<td>' . $val . '</td>';
       }
       if ($showButtons) {
-        $id = array_values($row)[0];
         $trHTML .= '
           <td>
             <div style="text-align: center;">
-              <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#editPopup' . $id . '">
+              <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#editPopup' . $i . '">
                 Edit
               </a>
             </div>
@@ -81,7 +72,7 @@ function createHTMLTable($tableData, $showButtons, $link){
         $trHTML .= '
           <td>
             <div style="text-align: center;">
-              <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#delPopup' . $id . '">
+              <a class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#delPopup' . $i . '">
                 Del
               </a>
             </div>
@@ -95,16 +86,18 @@ function createHTMLTable($tableData, $showButtons, $link){
 }
 
 function orderTableData($tableData, $orderBy, $orderDirection) {
-  $n = count($tableData);
-  for ($i = 0; $i < $n - 1; $i++) {
-    for ($j = 0; $j < $n - $i - 1; $j++) {
-      if ($orderDirection === 'ASC') {
-        if ($tableData[$j][$orderBy] > $tableData[$j + 1][$orderBy]) {
-          swap($tableData[$j], $tableData[$j + 1]);
-        }
-      } else {
-        if ($tableData[$j][$orderBy] < $tableData[$j + 1][$orderBy]) {
-          swap($tableData[$j], $tableData[$j + 1]);
+  if (!($orderBy == "null")) {
+    $n = count($tableData);
+    for ($i = 0; $i < $n - 1; $i++) {
+      for ($j = 0; $j < $n - $i - 1; $j++) {
+        if ($orderDirection === 'ASC') {
+          if ($tableData[$j][$orderBy] > $tableData[$j + 1][$orderBy]) {
+            swap($tableData[$j], $tableData[$j + 1]);
+          }
+        } else {
+          if ($tableData[$j][$orderBy] < $tableData[$j + 1][$orderBy]) {
+            swap($tableData[$j], $tableData[$j + 1]);
+          }
         }
       }
     }
@@ -154,14 +147,9 @@ function getEditPopup($tableName, $columns, $rows) {
   $editPopups = array();
   for ($i = 0; $i < count($rows); $i++) {
     $row = $rows[$i];
-    if (isset($row[$tableName . "_id"])) {
-      $id = $row[$tableName . "_id"];
-    } else {
-      $id = $i;
-    }
 
     $HTML = '
-      <div class="modal fade" id="editPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="editPopup' . $i . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -172,8 +160,11 @@ function getEditPopup($tableName, $columns, $rows) {
               <div class="modal-body">
                 <div class="form-group">';
 
-    for ($j = 1; $j < count($row); $j++) {
+    for ($j = 0; $j < count($row); $j++) {
       $key  = array_keys($row)[$j];
+      if ($key == ($tableName . "_id")) {
+        continue;
+      }
       $val  = array_values($row)[$j];
       $type = getColumnType($columns, $key);
       $HTML .= '<div class="form-group row"><div class="col-sm-4 d-flex justify-content-center align-items-center">' . $key . ':</div>';
@@ -187,11 +178,11 @@ function getEditPopup($tableName, $columns, $rows) {
                 <input type="hidden" name="table" value="' . $tableName . '">';
 
     if (!isRefTable($tableName)) {
-      $HTML .= '<input type="hidden" name="id" value="' . $id . '">';
+      $HTML .= '<input type="hidden" name="id" value="' . $i . '">';
     } else {
       foreach($row as $key => $val) {
         if (strpos($key, "_id") !== false) {
-          $HTML .= '<input type="hidden" name="oldValues[]" value="' . $val . '">';
+          $HTML .= '<input type="hidden" name="oldValues[' . $key . ']" value="' . $val . '">';
         }
       }
     }
@@ -267,11 +258,22 @@ function getDeletePopup($tableName, $rows) {
             </div>
             <form action="" method="post">
               <div class="modal-body">
-                <span>Sind Sie sicher, dass Sie den Eintrag mit der ID ' . $id . ' löschen wollen?</span>
+                <span>Sind Sie sicher, dass Sie den Eintrag löschen wollen?</span>
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer">';
+
+    if (!isRefTable($tableName)) {
+      $HTML .= '<input type="hidden" name="id" value="' . $id . '">';
+    } else {
+      foreach($row as $key => $val) {
+        if (strpos($key, "_id") !== false) {
+          $HTML .= '<input type="hidden" name="oldValues[' . $key . ']" value="' . $val . '">';
+        }
+      }
+    }
+
+    $HTML .= '
                 <input type="hidden" name="table" value="' . $tableName . '">
-                <input type="hidden" name="id" value="' . $id . '">
                 <input type="submit" class="btn btn-success" name="btnDel" id="delSubmit" value="OK">
               </div>
             </form>
