@@ -23,8 +23,17 @@ if (isset($_POST['btnEdit'])) {
 
 if (isset($_POST['btnDel'])) {
   $table = $_POST['table'];
-  $id    = $_POST['id'];
-  deleteRow($table, $id);
+  if (isRefTable($table)) {
+    if (isset($_POST['oldValues'])) {
+      $oldValues = $_POST['oldValues'];
+      deleteRowRefTable($table, $oldValues);
+    }
+  } else {
+    if (isset($_POST['id'])) {
+      $id = $_POST['id'];
+      deleteRow($table, $id);
+    }
+  }
 }
 
 if (isset($_POST['btnIns'])) {
@@ -123,12 +132,12 @@ $deletePopupHTML  = getDeletePopup($selectedTable, $rows);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="../js/notification.js"></script>
     <script>
-      $("#ueberschrift").click(function(){
+      $("#ueberschrift").click(function() {
         window.location.href = "../index.php";
       });
     </script>
     <?php
-      if (isset($notification)){
+      if (isset($notification)) {
         echo '<script>displayMessage("' . $notification . '");</script>';
       }
     ?>

@@ -51,7 +51,9 @@ function createHTMLTable($tableData, $showButtons, $thIsLink){
         }
       }
     }
-    $thHTML .= '
+
+    if ($thIsLink) {
+      $thHTML .= '
       <th colspan="2">
         <div style="text-align: center;">
           <a  class="btn btn-danger align-items-center justify-content-center" data-toggle="modal" data-target="#InsPopup">
@@ -59,6 +61,8 @@ function createHTMLTable($tableData, $showButtons, $thIsLink){
           </a>
         </div>
       </th>';
+    }
+
     $thHTML .= '</tr>';
 
     $trHTML = '';
@@ -196,7 +200,7 @@ function getEditPopup($tableName, $columns, $rows) {
     }
 
     $HTML .= '
-                <input type="submit" class="btn btn-success" name="btnEdit" id="editSubmit" value="OK">
+                <input type="submit" class="btn btn-success ml-1" name="btnEdit" id="editSubmit" value="OK">
               </div>
             </form>
           </div>
@@ -224,7 +228,10 @@ function getInsertPopup($tableName, $columns) {
             <div class="modal-body">
               <div class="form-group">';
 
-  for ($i = 1; $i < count($columns); $i++) {
+  for ($i = 0; $i < count($columns); $i++) {
+    if ($columns[$i]['COLUMN_NAME'] == ($tableName . "_id")) {
+      continue;
+    }
     $key  = $columns[$i]['COLUMN_NAME'];
     $type = $columns[$i]['DATA_TYPE'];
     $HTML .= '<span>' . $key . '</span>';
@@ -236,7 +243,7 @@ function getInsertPopup($tableName, $columns) {
             </div>
             <div class="modal-footer">
               <input type="hidden" name="table" value="' . $tableName . '">
-              <input type="submit" class="btn btn-success" name="btnIns" id="insSubmit" value="OK">
+              <input type="submit" class="btn btn-success ml-1" name="btnIns" id="insSubmit" value="OK">
             </div>
           </form>
         </div>
@@ -266,7 +273,8 @@ function getDeletePopup($tableName, $rows) {
               <div class="modal-footer">';
 
     if (!isRefTable($tableName)) {
-      $HTML .= '<input type="hidden" name="id" value="' . $i . '">';
+      $id = $row[$tableName . "_id"];
+      $HTML .= '<input type="hidden" name="id" value="' . $id . '">';
     } else {
       foreach($row as $key => $val) {
         if (strpos($key, "_id") !== false) {
@@ -277,7 +285,7 @@ function getDeletePopup($tableName, $rows) {
 
     $HTML .= '
                 <input type="hidden" name="table" value="' . $tableName . '">
-                <input type="submit" class="btn btn-success" name="btnDel" id="delSubmit" value="OK">
+                <input type="submit" class="btn btn-success ml-1" name="btnDel" id="delSubmit" value="OK">
               </div>
             </form>
           </div>
