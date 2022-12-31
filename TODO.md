@@ -1,7 +1,7 @@
 TODO
 
 - Add: Add, Edit & Del Buttons (Robert) ✓
-- edit für Referenztabellen (Robert)
+- edit für Referenztabellen (Robert) ✓
 - Tabelle leer funktioniert nicht (Robert)
 
 - Homepage überarbeiten (Kai) ✓
@@ -11,7 +11,7 @@ TODO
   - SQL-Injection anpassen ✓
   - DB zurücksetzen anpassen ✓
   - DB auswählen entfernen ✓
-- Edit: Sortieren-Funktion als eigenen Algorithmus (Kai)
+- Edit: Sortieren-Funktion als eigenen Algorithmus (Kai) ✓
 
 
 - Add: Home Button (Kai) ✓
