@@ -9,6 +9,9 @@
     font-family: neon;
     cursor: pointer;
 }
+.neonTableHeaderFont {
+  font-family: neonTableHeader;
+}
 
 .neonTableHeader{
     color: white;

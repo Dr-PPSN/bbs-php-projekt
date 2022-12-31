@@ -142,7 +142,7 @@ function drawArrow() {
 }
 
 function buildSelect($tableData, $selectedValue) {
-  $selectHTML = '<select name="table" class="form-control bg-dark neonTableHeader blueBorderWithoutHover" onchange="this.form.submit()">';
+  $selectHTML = '<select name="table" class="form-control bg-dark orangeText blueBorderWithoutHover neonTableHeaderFont" onchange="this.form.submit()">';
   for ($i = 0; $i < count($tableData); $i++) {
     $value = array_values($tableData[$i])[0];
     if ($selectedValue == $value) {
