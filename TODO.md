@@ -34,6 +34,6 @@ TODO
   - table header verschwindet beim Sortieren
   - echo "Cookie wurde gesetzt" entfernen ✓
 
-- wenn Tabelle leer, dann funktioniert die Landing Page nicht mehr (Kai)
+- wenn Tabelle leer, dann funktioniert die Landing Page nicht mehr (Kai) ✓
   - siehe Count() in index
-  - besser: Funktionsrückgabe vorher in Variable schreiben, dann echo Variable im HTML
+  - besser: Funktionsrückgabe vorher in Variable schreiben, dann echo Variable im HTML X

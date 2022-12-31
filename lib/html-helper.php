@@ -6,8 +6,16 @@ function buildHtmlTable($tableData, $showButtons, $link) {
   return createHTMLTable($tableData, $showButtons, $link);
 }
 
+//function to check if $tableData[0] exists and is not empty
+function checkTableDataa($tableData) {
+  if (isset($tableData[0]) && !empty($tableData[0])) {
+    return true;
+  }
+  return false;
+}
+
 function createHTMLTable($tableData, $showButtons, $thIsLink){
-  if (isset($tableData)) {
+  if (isset($tableData) && checkTableDataa($tableData)) {
     $colNames = array_keys($tableData[0]);
     $thHTML = '<tr>';
     foreach ($colNames as $colName) {

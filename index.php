@@ -15,6 +15,13 @@ function checkPHPVersion() {
     exit();
   }
 }
+//function to check if $tableData[0] exists and is not empty
+function checkTableData($tableData) {
+  if (isset($tableData[0]) && !empty($tableData[0])) {
+    return true;
+  }
+  return false;
+}
 
 ?>
 
@@ -60,8 +67,12 @@ function checkPHPVersion() {
             //count how many rows are in the table
             $tableRows = count($tableData);
             //count how many columns are in the table
-            $tableColumns = count($tableData[0]);
-
+            if (checkTableData($tableData)){
+              $tableColumns = count($tableData[0]);
+            }
+            else {
+              $tableColumns = 0;
+            }
             echo '<div class="col mt-3 mt-md-5 d-flex align-items-center justify-content-center">
                     <div class="card text-center bg-transparent blueBorder" style="width: 14rem;">
                       <div class="card-body">
@@ -72,14 +83,6 @@ function checkPHPVersion() {
                       </div>
                     </div>
                   </div>';
-
-            // echo '<div class="col-12 col-md-6 col-lg-4">
-            //         <div class="card">
-            //           <div class="card-body">
-            //             Karte für Tabelle: '. $table . ';
-            //           </div>
-            //         </div>
-            //       </div>';
           }
         ?>
       </div>

@@ -38,6 +38,7 @@ if (isset($_GET['orderBy'])) {
 }
 // Speichere die Sortierrichtung in der Session, damit sie in der nächsten Seite wieder verwendet werden kann
 $_SESSION['orderDirection'] = $orderDirection;
+
 ?>
 
 <!DOCTYPE html>
