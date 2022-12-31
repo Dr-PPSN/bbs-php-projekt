@@ -235,8 +235,10 @@ function getInsertPopup($tableName, $columns) {
     }
     $key  = $columns[$i]['COLUMN_NAME'];
     $type = $columns[$i]['DATA_TYPE'];
-    $HTML .= '<span>' . $key . '</span>';
-    $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="ins-' . $key . '" name="ins[' . $key . ']">';
+    // $HTML .= '<span>' . $key . '</span>';
+    // $HTML .= '<input type="' . $type . '" class="form-control mt-2" id="ins-' . $key . '" name="ins[' . $key . ']">';
+    $HTML .= '<div class="form-group row"><div class="col-sm-4 d-flex justify-content-center align-items-center">' . $key . ':</div>';
+    $HTML .= '<div class="col-sm-8 d-flex justify-content-center align-items-center"><input type="' . $type . '" class="form-control mt-2 w-75" id="ins-' . $key . '" name="ins[' . $key . ']"></div></div>';
   }
   
   $HTML .= '

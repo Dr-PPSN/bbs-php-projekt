@@ -94,7 +94,7 @@ $deletePopupHTML  = getDeletePopup($selectedTable, $rows);
     <link rel="stylesheet" type="text/css" href="../styles/style.css">
   </head>
   <body class="bg-dark">
-    <div class="container-fluid bg-dark">
+    <div class="container-fluid bg-dark pb-5">
       <div class="row bg-dark">
         <div class="col-sm-3 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
           <form action="../index.php">
@@ -126,6 +126,16 @@ $deletePopupHTML  = getDeletePopup($selectedTable, $rows);
     <?php echo $editPopupsHTML ?>
     <?php echo $insertPopupsHTML ?>
     <?php echo $deletePopupHTML ?>
+    <!-- footer -->
+    <div class="row bg-dark fixed-bottom">
+        <hr>
+        <div class="col-md-4 col-sm-4 col-xs-4 d-flex align-items-center justify-content-center">
+          <p class="redText">© 2023 - BBS PHP Projekt</p>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-8 d-flex align-items-center justify-content-center">
+          <p class="redText">Robert, Kai und Dennis</p>
+        </div>
+      </div>
     <!-- import scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

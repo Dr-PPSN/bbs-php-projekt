@@ -37,7 +37,7 @@ function checkTableData($tableData) {
     <link rel="stylesheet" type="text/css" href="./styles/neonBTN.css">
   </head>
   <body class="bg-dark">
-    <div class="container-fluid bg-dark mb-3">
+    <div class="container-fluid bg-dark pb-5">
       <!-- Menue -->
       <div class="row bg-dark">
         <div class="col-sm-3 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
