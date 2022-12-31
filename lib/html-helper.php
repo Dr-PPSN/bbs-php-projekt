@@ -242,14 +242,9 @@ function getDeletePopup($tableName, $rows) {
   $delPopups = array();
   for ($i = 0; $i < count($rows); $i++) {
     $row = $rows[$i];
-    if (isset($row[$tableName . "_id"])) {
-      $id = $row[$tableName . "_id"];
-    } else {
-      $id = $i;
-    }
 
     $HTML = '
-      <div class="modal fade" id="delPopup' . $id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="delPopup' . $i . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -263,7 +258,7 @@ function getDeletePopup($tableName, $rows) {
               <div class="modal-footer">';
 
     if (!isRefTable($tableName)) {
-      $HTML .= '<input type="hidden" name="id" value="' . $id . '">';
+      $HTML .= '<input type="hidden" name="id" value="' . $i . '">';
     } else {
       foreach($row as $key => $val) {
         if (strpos($key, "_id") !== false) {

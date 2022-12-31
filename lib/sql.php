@@ -98,7 +98,6 @@ function updateRefTable(string $tablename, array $oldValues, array $newValues) {
   }
   $SQL = substr($SQL, 0, -3);
 
-  echo $SQL;
   return executeSQL($SQL);
 }
 
@@ -125,7 +124,6 @@ function deleteRowRefTable(string $tableName, array $oldValues) {
   }
   $SQL = substr($SQL, 0, -3);
 
-  echo $SQL;
   return executeSQL($SQL);
 }
 
