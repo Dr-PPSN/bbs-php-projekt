@@ -43,6 +43,7 @@ function createHTMLTable($tableData, $showButtons, $thIsLink){
         }
       }
     }
+
     if ($thIsLink) {
       $thHTML .= '
       <th colspan="2">
@@ -261,7 +262,8 @@ function getDeletePopup($tableName, $rows) {
               <div class="modal-footer">';
 
     if (!isRefTable($tableName)) {
-      $HTML .= '<input type="hidden" name="id" value="' . $i . '">';
+      $id = $row[$tableName . "_id"];
+      $HTML .= '<input type="hidden" name="id" value="' . $id . '">';
     } else {
       foreach($row as $key => $val) {
         if (strpos($key, "_id") !== false) {

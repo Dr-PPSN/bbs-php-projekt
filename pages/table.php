@@ -23,8 +23,18 @@ if (isset($_POST['btnEdit'])) {
 
 if (isset($_POST['btnDel'])) {
   $table = $_POST['table'];
-  $id    = $_POST['id'];
-  deleteRow($table, $id);
+  if (isRefTable($table)) {
+    if (isset($_POST['oldValues'])) {
+      $oldValues = $_POST['oldValues'];
+      deleteRowRefTable($table, $oldValues);
+    }
+  } else {
+    if (isset($_POST['id'])) {
+    echo 'hier';
+      $id = $_POST['id'];
+      deleteRow($table, $id);
+    }
+  }
 }
 
 if (isset($_POST['btnIns'])) {
