@@ -30,7 +30,6 @@ if (isset($_POST['btnDel'])) {
     }
   } else {
     if (isset($_POST['id'])) {
-    echo 'hier';
       $id = $_POST['id'];
       deleteRow($table, $id);
     }
