@@ -84,8 +84,8 @@ $deletePopupHTML  = getDeletePopup($selectedTable, $rows);
     <link rel="stylesheet" type="text/css" href="../styles/message.css">
     <link rel="stylesheet" type="text/css" href="../styles/style.css">
   </head>
-  <body>
-    <div class="container-fluid h-100 bg-dark">
+  <body class="bg-dark">
+    <div class="container-fluid bg-dark">
       <div class="row bg-dark">
         <div class="col-sm-3 col-md-2 d-flex align-items-center justify-content-center pr-4 mb-2 mt-3">
           <form action="../index.php">
